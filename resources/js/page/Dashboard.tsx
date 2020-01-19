@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx  from "clsx";
 import {Link, Route, useRouteMatch} from "react-router-dom";
 import {
     AppBar,
@@ -14,10 +14,10 @@ import {
     Theme,
     Toolbar,
     Typography
-} from "@material-ui/core";
-import {CalendarToday, Menu, PinDrop} from "@material-ui/icons";
+} from '@material-ui/core';
 import {LocationTable} from "../components/AddLocationTable";
 import React from "react";
+import {CalendarToday, Menu, PinDrop} from "../../../node_modules/@material-ui/icons/index";
 
 const drawerWidth = 240;
 
@@ -68,9 +68,8 @@ const useStyle = makeStyles((theme: Theme) =>
     })
 );
 
-export default function Dashboard() {
-    let match = useRouteMatch();
-    var [openDrawer, setOpenDrawer] = React.useState(false);
+export function Dashboard() {
+    var [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     var handleMenuButton = () => setOpenDrawer(!openDrawer);
     const classes = useStyle();
     return (
