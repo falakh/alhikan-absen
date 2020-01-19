@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Model\Kehadiran;
+use App\Model\AbsenModel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,7 +19,7 @@ class KehadiranTest extends TestCase
     public function testBasicTest()
     {
 
-        $kehadiran = new Kehadiran();
+        $kehadiran = new AbsenModel();
         $kehadiran->Absen(1,1);
         $kehadiran->save();
 

@@ -21,7 +21,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/addCabang','LocationController@AddCabang');
     Route::post('/nearMe','LocationController@findNearestCabangRequestHandler');
     Route::post('/getAllCabang','LocationController@GetAllCabang');
-    Route::post('/absenPegawai','Absen@PegawaiAbsen');
+    Route::post('/absenPegawai','AbsenController@PegawaiAbsen');
+    Route::get('/getAllAbsen','AbsenController@getAllData');
+
 
 });
 

@@ -25,3 +25,9 @@ export interface Cabang {
     created_at: string,
     updated_at: string,
 }
+
+export interface AttedanceUser{
+    name : String,
+    created_at: String
+
+}

@@ -1,5 +1,6 @@
 import Axios from "axios";
-import {LoginInput, LoginEvent, Cabang} from "../type/TypeList";
+import {LoginInput, LoginEvent, Cabang, AttedanceUser} from "../type/TypeList";
+import {async} from "q";
 
 
 export async function Login(loginInput : LoginInput,loginEvent? : LoginEvent){
@@ -15,4 +16,9 @@ export async function Login(loginInput : LoginInput,loginEvent? : LoginEvent){
 export async function getAllLokasi(){
     var hasil = await Axios.post("/api/getAllCabang");
     return <Cabang[]>hasil.data as Cabang[];
+}
+
+export async function getAllAbsensi() {
+    var hasil = await Axios.get("/api/getAllAbsen")
+    return <AttedanceUser[]>hasil.data as AttedanceUser[];
 }

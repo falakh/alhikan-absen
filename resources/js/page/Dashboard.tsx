@@ -18,6 +18,7 @@ import {
 import {LocationTable} from "../components/AddLocationTable";
 import React from "react";
 import {CalendarToday, Menu, PinDrop} from "../../../node_modules/@material-ui/icons/index";
+import {AbsensiDataTableComponent} from "../components/AbsensiDataTableComponent";
 
 const drawerWidth = 240;
 
@@ -128,6 +129,9 @@ export function Dashboard() {
                 <div className={classes.drawerHeader} />
                 <Route path="/dashboard/lokasi">
                     <LocationTable />
+                </Route>
+                <Route path="/dashboard" exact>
+                    <AbsensiDataTableComponent/>
                 </Route>
             </main>
         </div>
