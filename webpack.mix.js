@@ -12,7 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.react('resources/js/app.js', 'public/js')
-    .extract(['react','axios','react-dom',"@material-ui/core"])
    .sass('resources/sass/app.scss', 'public/css')
     .setPublicPath("/")
 
