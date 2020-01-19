@@ -1,15 +1,6 @@
 import React from "react";
-import {
-    SwipeableDrawer,
-    Button,
-    List,
-    ListItem,
-    makeStyles,
-    Container,
-    ListItemText,
-    ListItemIcon
-} from "@material-ui/core";
-import { Drafts, Note, CalendarToday } from "@material-ui/icons";
+import {Container, List, ListItem, ListItemIcon, ListItemText, makeStyles, SwipeableDrawer} from "@material-ui/core";
+import {CalendarToday} from "@material-ui/icons";
 
 const useStyles = makeStyles({
     list: {

@@ -12,15 +12,17 @@ const mix = require('laravel-mix');
  */
 
 mix.react('resources/js/app.js', 'public/js')
+    .extract(['react','axios','react-dom',"@material-ui/core"])
    .sass('resources/sass/app.scss', 'public/css')
     .setPublicPath("/")
+
    .webpackConfig({
       module: {
         rules: [
           {
             test: /\.tsx?$/,
             loader: "ts-loader",
-            exclude: /node_modules/
+            exclude: "/node_modules"
           }
         ]
       },

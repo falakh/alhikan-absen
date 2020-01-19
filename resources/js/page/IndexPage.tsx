@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 import LoginPage from "./LoginPage";
-import { NavBar } from "../components/NavBar";
 import Dashboard from "./Dashboard";
 
 export default function App() {

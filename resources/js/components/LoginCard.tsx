@@ -1,12 +1,6 @@
-import React, { Component } from "react";
-import {
-    CardContent,
-    TextField,
-    Card,
-    Button,
-    Container
-} from "@material-ui/core";
-import { Login } from "../util/client";
+import React from "react";
+import {Button, Card, CardContent, Container, TextField} from "@material-ui/core";
+import {Login} from "../util/client";
 
 export default function LoginCard() {
     const [email, setEmail] = React.useState("");

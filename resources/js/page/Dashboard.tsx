@@ -1,30 +1,22 @@
 import clsx from "clsx";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Link,
-    Route,
-    useRouteMatch,
-    useParams
-} from "react-router-dom";
+import {Link, Route, useRouteMatch} from "react-router-dom";
 import {
     AppBar,
-    Toolbar,
-    Button,
-    Typography,
-    IconButton,
+    createStyles,
+    CssBaseline,
     Drawer,
-    ListItem,
+    IconButton,
     List,
+    ListItem,
     ListItemIcon,
     ListItemText,
-    Theme,
     makeStyles,
-    createStyles,
-    CssBaseline
+    Theme,
+    Toolbar,
+    Typography
 } from "@material-ui/core";
-import { Menu, Mail, Inbox, CalendarToday, PinDrop } from "@material-ui/icons";
-import { LocationTable } from "../components/AddLocationTable";
+import {CalendarToday, Menu, PinDrop} from "@material-ui/icons";
+import {LocationTable} from "../components/AddLocationTable";
 import React from "react";
 
 const drawerWidth = 240;

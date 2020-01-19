@@ -1,17 +1,17 @@
 import React from "react";
 import {
-    TableContainer,
-    TableHead,
-    TableRow,
-    TableCell,
+    Button,
+    CircularProgress,
+    createStyles,
     Paper,
     Table,
     TableBody,
-    Button,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
     Theme,
-    withStyles,
-    createStyles,
-    CircularProgress
+    withStyles
 } from "@material-ui/core";
 import {Cabang} from "../type/TypeList";
 import {getAllLokasi} from "../util/client";

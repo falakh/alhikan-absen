@@ -1,13 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import {
-    Card,
-    Container,
-    TextField,
-    Button,
-    CardContent
-} from "@material-ui/core";
-import { Login } from "../util/client";
+import React, {Component} from "react";
+import {Container} from "@material-ui/core";
 import LoginCard from "../components/LoginCard";
 
 export default class LoginPage extends Component {
