@@ -13,15 +13,14 @@ class AddDistanceFormula extends Migration
      */
     public function up()
     {
-        DB::unprepared("
-DROP FUNCTION IF EXISTS distance;
-CREATE FUNCTION distance(
+        $this->down();
+        $sql = ("
+CREATE  FUNCTION `distance`(
         lat1 FLOAT, lon1 FLOAT,
         lat2 FLOAT, lon2 FLOAT
      ) RETURNS FLOAT
     NO SQL
     DETERMINISTIC
-    
 BEGIN
     RETURN  DEGREES(
     ATAN2(
@@ -31,9 +30,11 @@ BEGIN
              (SIN(RADIANS(lat1))*COS(RADIANS(lat2)) *
               COS(RADIANS(lon2-lon1))) ,2)),
       SIN(RADIANS(lat1))*SIN(RADIANS(lat2)) +
-      COS(RADIANS(lat1))*COS(RADIANS(lat2))*COS(RADIANS(lon2-lon1)))) * 111;
+      COS(RADIANS(lat1))*COS(RADIANS(lat2))
+        *COS(RADIANS(lon2-lon1))))*111 ;
 END
- ;");
+");
+        DB::connection()->getPdo()->exec($sql);
     }
 
     /**
@@ -43,6 +44,8 @@ END
      */
     public function down()
     {
-        //
+
+        $sql = ("DROP FUNCTION IF EXISTS distance;");
+        DB::connection()->getPdo()->exec($sql);
     }
 }

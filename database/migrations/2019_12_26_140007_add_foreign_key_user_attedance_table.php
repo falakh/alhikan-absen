@@ -15,12 +15,19 @@ class AddForeignKeyUserAttedanceTable extends Migration
     {
         if(Schema::hasTable("users")){
             Schema::table("attedance",function (Blueprint $table) {
-                $table->foreign('user_id')
+                $table->foreign('userId')
                 ->references('id')
                 ->on('users');
-            });
 
+            });
         }
+        if(Schema::hasTable("cabang")){
+            Schema::table("attedance",function (Blueprint $table){
+                $table->foreign("cabangId")
+                    ->references("id")
+                    ->on("cabang");
+            });
+    }
     }
 
     /**

@@ -15,7 +15,8 @@ class CreateAttedanceTable extends Migration
     {
         Schema::create('attedance', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('userId')->unsigned();
+            $table->bigInteger("cabangId")->unsigned();
             $table->timestamps();
         });
     }

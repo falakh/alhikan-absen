@@ -13,10 +13,8 @@
 
 Route::get('/{path?}', function () {
     return view('welcome');
-});
-Route::get('/{path?}/{data?}', function () {
-    return view('welcome');
-});
+})->where('path','^((?!api).)*$');
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
