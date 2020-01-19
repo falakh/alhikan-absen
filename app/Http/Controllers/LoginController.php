@@ -19,9 +19,7 @@ class LoginController extends Controller
         $isVaid = User::where('email',$user->email)->where("password",$user->password) -> first();
        if($isVaid){
         $token = JWTAuth::fromUser($isVaid);
-        $request->session()->start();
-        $request->session()->put('token', $token);
-        $request->session()->save();
+
         return response(["status"=>"sukses","data"=>$isVaid,"token"=>$token],200);
        }
         return response(["status"=>"fail","data"=>"user tidak ditemukan"],500);
