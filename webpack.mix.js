@@ -27,6 +27,10 @@ mix.react('resources/js/app.js', 'public/js')
         ]
       },
       resolve: {
+        alias : {
+            '@material-ui/core': '@material-ui/core/esm',
+            '@material-ui/icons': '@material-ui/core/esm'
+        },
         extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
       }
     });
