@@ -42,7 +42,7 @@ class LocationController extends Controller
                 return ['status' => "sukses", 'data' => $cabang];
             }
         } catch (Exception $excep) {
-            return response(['status' => 'eror', 'message' => "terdapat eror"], 400);
+            return response(['status' => 'eror', 'message' => "$excep"], 400);
         }
     }
 
