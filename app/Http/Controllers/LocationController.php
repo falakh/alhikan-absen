@@ -17,7 +17,7 @@ class LocationController extends Controller
 
     public function GetNearestCabang($latitude, $longitude)
     {
-        $hasil = DB::select("select * from Cabang where distance(Cabang.latitude,Cabang.longitude,$latitude,$longitude) <= Cabang.radius");
+        $hasil = DB::select("select * from Cabang where ST_Distance(point(Cabang.latitude,Cabang.longitude),Point($latitude,$longitude)) <= Cabang.radius");
         return ["cabang" => $hasil,"jumlah"=>sizeof($hasil)];
     }
 
