@@ -27,6 +27,7 @@ export function  AbsensiDataTableComponent(){
             columns={[
             { title: 'Name', field: 'name' },
             { title: 'tanggal', field: 'created_at' },
+            {tittle: 'cabang',field:'cabang'}
 
         ]}
          data={dataAbsensi}/>;
