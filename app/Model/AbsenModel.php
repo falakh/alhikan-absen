@@ -26,7 +26,7 @@ class AbsenModel extends Model
     }
 
     public function getAllData(){
-        return DB::select('SELECT attedance.created_at,Cabang.name,Users.name from attedance JOIN users join Cabang');
+        return DB::select('SELECT attedance.created_at,Cabang.name,Users.name from attedance JOIN Users join Cabang');
     }
     protected $table = "attedance";
 }
