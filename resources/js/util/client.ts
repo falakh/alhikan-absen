@@ -22,3 +22,13 @@ export async function getAllAbsensi() {
     var hasil = await Axios.get("/api/getAllAbsen")
     return <AttedanceUser[]>hasil.data as AttedanceUser[];
 }
+
+export async function addLokasi(cabang : Cabang) {
+    return Axios.post("/api/addCabang",{
+        "latitude":cabang.latitude,
+        "longitude":cabang.longitude,
+        "name": cabang.name,
+        "radius":cabang.radius,
+        "addres":cabang.addres
+    })
+}

@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import {LocationTable} from "../components/AddLocationTable";
 import React from "react";
-import {CalendarToday, Menu, PinDrop} from "../../../node_modules/@material-ui/icons/index";
+import {CalendarToday, Menu, PinDrop,Person} from "../../../node_modules/@material-ui/icons/index";
 import {AbsensiDataTableComponent} from "../components/AbsensiDataTableComponent";
 
 const drawerWidth = 240;
@@ -110,12 +110,20 @@ export function Dashboard() {
                             <ListItemText primary="Kehadiran" />
                         </ListItem>
                     </Link>
-                    <Link to="/dashboard/lokasi">
+                    <Link to="/dashboard/lokasi" >
                         <ListItem button>
                             <ListItemIcon>
                                 <PinDrop />
                             </ListItemIcon>
                             <ListItemText primary="Lokasi" />
+                        </ListItem>
+                    </Link>
+                    <Link to="/dashboard/userList" >
+                        <ListItem button>
+                            <ListItemIcon>
+                                <Person/>
+                            </ListItemIcon>
+                            <ListItemText primary="UserList" />
                         </ListItem>
                     </Link>
                 </List>

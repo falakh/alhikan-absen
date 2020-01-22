@@ -22,5 +22,6 @@ class AbsenController extends Controller
     function getAllData(Request $request){
         $absen =  new AbsenModel();
         return json_encode($absen->getAllData());
+        
     }
 }

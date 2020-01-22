@@ -15,7 +15,7 @@ class AddDistanceFormula extends Migration
     {
         $this->down();
         $sql = ("
-CREATE  FUNCTION `distance`(
+CREATE  FUNCTION `jarak`(
         lat1 FLOAT, lon1 FLOAT,
         lat2 FLOAT, lon2 FLOAT
      ) RETURNS FLOAT
@@ -45,7 +45,7 @@ END
     public function down()
     {
 
-        $sql = ("DROP FUNCTION IF EXISTS distance;");
+        $sql = ("DROP FUNCTION IF EXISTS jarak;");
         DB::connection()->getPdo()->exec($sql);
     }
 }
