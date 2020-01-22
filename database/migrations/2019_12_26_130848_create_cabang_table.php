@@ -13,7 +13,7 @@ class CreateCabangTable extends Migration
      */
     public function up()
     {
-        Schema::create('cabang', function (Blueprint $table) {
+        Schema::create('Cabang', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('addres');
