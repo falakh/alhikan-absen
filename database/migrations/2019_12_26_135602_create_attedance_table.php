@@ -17,6 +17,7 @@ class CreateAttedanceTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('userId')->unsigned();
             $table->bigInteger("cabangId")->unsigned();
+            $table->string('type');
             $table->timestamps();
         });
     }
