@@ -31,6 +31,6 @@ class CreateCabangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Cabang');
+        Schema::dropIfExists('cabang');
     }
 }
