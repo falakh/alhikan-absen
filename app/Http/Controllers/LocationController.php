@@ -17,13 +17,13 @@ class LocationController extends Controller
 
     public function GetNearestCabang($latitude, $longitude)
     {
-        $hasil = DB::select("select * from Cabang where jarak(Cabang.latitude,Cabang.longitude,$latitude,$longitude) <= Cabang.radius");
+        $hasil = DB::select("select * from Cabang where jarak(cabang.latitude,cabang.longitude,$latitude,$longitude) <= cabang.radius");
         return ["cabang" => $hasil,"jumlah"=>sizeof($hasil)];
     }
 
      public function GetAllCabang(Request $request)
     {
-        return DB::select("select * from Cabang");
+        return DB::select("select * from cabang");
 
     }
 

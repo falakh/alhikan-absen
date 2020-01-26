@@ -13,11 +13,11 @@ class CreateCabangTable extends Migration
      */
     public function up()
     {
-        Schema::create('Cabang', function (Blueprint $table) {
+        Schema::create('cabang', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('addres');
-            $table->float('latitude');
+            $table->float('lactitude');
             $table->float('longitude');
             $table->float('radius');
             $table->timestamps();
