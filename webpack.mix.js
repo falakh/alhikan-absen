@@ -13,9 +13,13 @@ const mix = require('laravel-mix');
 
 mix.react('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
+    .extract(['react','@material-ui/core','@material-ui/icons'])
     .setPublicPath("/")
 
    .webpackConfig({
+       output:{
+           chunkFilename:'public/js/reactjs_code_split/[name].js',
+       },
       module: {
         rules: [
           {
