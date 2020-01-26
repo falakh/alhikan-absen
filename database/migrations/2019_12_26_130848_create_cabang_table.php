@@ -17,7 +17,7 @@ class CreateCabangTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('addres');
-            $table->float('lactitude');
+            $table->float('latitude');
             $table->float('longitude');
             $table->float('radius');
             $table->timestamps();
