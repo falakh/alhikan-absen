@@ -1,19 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import LoginPage from './LoginPage';
-import {Dashboard} from "./Dashboard";
 
+const loginPage = React.lazy(()=> import(/* webpackPrefetch: true */"./LoginPage"));
+const dashboard = React.lazy(()=> import(/* webpackPrefetch: true */"./Dashboard"));
 function App() {
     return (
         <Router>
-            <Route path="/Login">
-                <LoginPage/>
+            <Route path="/Login" render={()=>loginPage}>
             </Route>
-            <Route path="/dashboard">
-                <Dashboard/>
-            </Route>
-
+            <Route path="/dashboard" render={()=>dashboard}/>
             <Route exact path="/"></Route>
 
         </Router>

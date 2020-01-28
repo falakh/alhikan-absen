@@ -12,28 +12,36 @@ const mix = require('laravel-mix');
  */
 
 mix.react('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')
-    .extract(['react','@material-ui/core','@material-ui/icons'])
-    .setPublicPath("/")
+  .sass('resources/sass/app.scss', 'public/css')
+  .extract(['react', '@material-ui/core', '@material-ui/icons'])
+  .setPublicPath("/")
 
-   .webpackConfig({
-       output:{
-           chunkFilename:'public/js/reactjs_code_split/[name].js',
-       },
-      module: {
-        rules: [
-          {
-            test: /\.tsx?$/,
-            loader: "ts-loader",
-            exclude: "/node_modules/"
-          }
-        ]
+  .webpackConfig({
+    entry: {
+      index: './resources/js/app.js',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      chunkFilename: '[name].bundle.js',
+      // `path` is the folder where Webpack will place your bundles
+      path: __dirname + '/public',
+      // `publicPath` is where Webpack will load your bundles from (optional)
+      publicPath: __dirname + 'dist/'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: "ts-loader",
+          exclude: "/node_modules/"
+        }
+      ]
+    },
+    resolve: {
+      alias: {
+        '@material-ui/core': '@material-ui/core/esm',
+        '@material-ui/icons': '@material-ui/core/esm'
       },
-      resolve: {
-        alias : {
-            '@material-ui/core': '@material-ui/core/esm',
-            '@material-ui/icons': '@material-ui/core/esm'
-        },
-        extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
-      }
-    });
+      extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
+    }
+  });

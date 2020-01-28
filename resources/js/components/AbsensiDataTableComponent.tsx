@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
-export function  AbsensiDataTableComponent(){
+export default function  AbsensiDataTableComponent(){
 
     var [dataAbsensi,setDataAbsensi] = useState<AttedanceUser[]>([]);
     var [dialogShown,setDialogShow] = useState(false);

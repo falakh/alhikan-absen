@@ -1,6 +1,7 @@
 {
-    "/public/js/reactjs_code_split//public/js/app.js": "/public/js/reactjs_code_split//public/js/app.js",
+    "/public/js/manifest.bundle.js": "/public/js/manifest.bundle.js",
+    "/public/js/vendor.bundle.js": "/public/js/vendor.bundle.js",
+    "/public/js/app.bundle.js": "/public/js/app.bundle.js",
     "/public/css/app.css": "/public/css/app.css",
-    "/public/js/manifest.js": "/public/js/manifest.js",
-    "/public/js/reactjs_code_split//public/js/vendor.js": "/public/js/reactjs_code_split//public/js/vendor.js"
+    "/index.bundle.js": "/index.bundle.js"
 }

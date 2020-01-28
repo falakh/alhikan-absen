@@ -15,10 +15,8 @@ import {
     Toolbar,
     Typography
 } from '@material-ui/core';
-import {LocationTable} from "../components/AddLocationTable";
 import React from "react";
-import {CalendarToday, Menu, PinDrop,Person} from "../../../node_modules/@material-ui/icons/index";
-import {AbsensiDataTableComponent} from "../components/AbsensiDataTableComponent";
+import {CalendarToday, Menu, PinDrop,Person} from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -69,7 +67,11 @@ const useStyle = makeStyles((theme: Theme) =>
     })
 );
 
-export function Dashboard() {
+const absensiTable = React.lazy(()=> import(/* webpackPrefetch: true */"../components/AbsensiDataTableComponent"));
+const addLocationTable = React.lazy(()=> import(/* webpackPrefetch: true */"../components/AddLocationTable"));
+
+
+export default function Dashboard() {
     var [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     var handleMenuButton = () => setOpenDrawer(!openDrawer);
     const classes = useStyle();
@@ -135,12 +137,9 @@ export function Dashboard() {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                <Route path="/dashboard/lokasi">
-                    <LocationTable />
-                </Route>
-                <Route path="/dashboard" exact>
-                    <AbsensiDataTableComponent/>
-                </Route>
+                <Route path="/dashboard/lokasi" render={()=>addLocationTable}/>
+                    
+                <Route path="/dashboard" exact render={()=>absensiTable}/>
             </main>
         </div>
     );

@@ -18,7 +18,7 @@ import { getAllLokasi, addLokasi } from "../util/client";
 import { useAsync } from "react-async";
 import MaterialTable from "material-table";
 
-export function LocationTable() {
+export  default function LocationTable() {
     const { data, error, isLoading } = useAsync({ promiseFn: getAllLokasi });
     var [isEdit, setEdit] = useState(false);
     if (isLoading) {
