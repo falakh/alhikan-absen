@@ -1,7 +1,7 @@
 {
-    "/public/js/manifest.bundle.js": "/public/js/manifest.bundle.js",
-    "/public/js/vendor.bundle.js": "/public/js/vendor.bundle.js",
-    "/public/js/app.bundle.js": "/public/js/app.bundle.js",
+    "/public/js/manifest.js": "/public/js/manifest.js",
+    "/public/js/vendor.js": "/public/js/vendor.js",
+    "/public/js/app.js": "/public/js/app.js",
     "/public/css/app.css": "/public/css/app.css",
-    "/index.bundle.js": "/index.bundle.js"
+    "/index.js": "/index.js"
 }

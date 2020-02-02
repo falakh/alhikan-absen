@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import {AttedanceUser} from "../type/TypeList";
 import MaterialTable from "material-table";
-import Axios from "axios";
 import {useAsync} from "react-async";
 import {getAllAbsensi, getAllLokasi} from "../util/client";
 import {Button, CircularProgress, Dialog, DialogActions} from "@material-ui/core";
@@ -49,7 +48,7 @@ export default function  AbsensiDataTableComponent(){
          </div>;
 }
 
-function DialogEdit(show: boolean,) {
+function DialogEdit(show: boolean) {
     return <Dialog
         fullScreen={false}
         open={show}

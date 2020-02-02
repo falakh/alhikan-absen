@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -29,8 +28,8 @@
 <div id="example"></div>
 
 
-<script src="{{ secure_asset('js/manifest.js') }}"></script>
-<script src="{{ secure_asset('js/vendor.js') }}"></script>
-<script src="{{ secure_asset('js/app.js') }}"></script>
+<script src="{{ asset('js/manifest.js') }}"></script>
+<script src="{{ asset('js/vendor.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -1,5 +1,10 @@
-import clsx  from "clsx";
-import {Link, Route, useRouteMatch} from "react-router-dom";
+import clsx from "clsx";
+import {
+    Link,
+    Route,
+    useRouteMatch,
+    BrowserRouter as Router
+} from "react-router-dom";
 import {
     AppBar,
     createStyles,
@@ -14,9 +19,13 @@ import {
     Theme,
     Toolbar,
     Typography
-} from '@material-ui/core';
-import React from "react";
-import {CalendarToday, Menu, PinDrop,Person} from "@material-ui/icons";
+} from "@material-ui/core";
+import React, { Suspense } from "react";
+import { CalendarToday, Menu, PinDrop, Person } from "@material-ui/icons";
+
+
+var absensiTable = React.lazy(()=>import ("../components/AbsensiDataTableComponent"));
+var locationTable = React.lazy(()=>import ("../components/AddLocationTable"));
 
 const drawerWidth = 240;
 
@@ -66,15 +75,12 @@ const useStyle = makeStyles((theme: Theme) =>
         toolbar: theme.mixins.toolbar
     })
 );
-
-const absensiTable = React.lazy(()=> import(/* webpackPrefetch: true */"../components/AbsensiDataTableComponent"));
-const addLocationTable = React.lazy(()=> import(/* webpackPrefetch: true */"../components/AddLocationTable"));
-
-
 export default function Dashboard() {
-    var [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
+    var [openDrawer, setOpenDrawer] = React.useState(false);
+
     var handleMenuButton = () => setOpenDrawer(!openDrawer);
     const classes = useStyle();
+    console.log("test");
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -112,7 +118,7 @@ export default function Dashboard() {
                             <ListItemText primary="Kehadiran" />
                         </ListItem>
                     </Link>
-                    <Link to="/dashboard/lokasi" >
+                    <Link to="/dashboard/lokasi">
                         <ListItem button>
                             <ListItemIcon>
                                 <PinDrop />
@@ -120,10 +126,10 @@ export default function Dashboard() {
                             <ListItemText primary="Lokasi" />
                         </ListItem>
                     </Link>
-                    <Link to="/dashboard/userList" >
+                    <Link to="/dashboard/userList">
                         <ListItem button>
                             <ListItemIcon>
-                                <Person/>
+                                <Person />
                             </ListItemIcon>
                             <ListItemText primary="UserList" />
                         </ListItem>
@@ -137,10 +143,17 @@ export default function Dashboard() {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                <Route path="/dashboard/lokasi" render={()=>addLocationTable}/>
-                    
-                <Route path="/dashboard" exact render={()=>absensiTable}/>
+                    <Route
+                        path="/dashboard/lokasi"
+                        component={locationTable}
+                    ></Route>
+                    <Route
+                        path="/dashboard"
+                        component={absensiTable}
+                        exact
+                    ></Route>
             </main>
         </div>
+
     );
 }
