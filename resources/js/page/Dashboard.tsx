@@ -26,6 +26,7 @@ import { CalendarToday, Menu, PinDrop, Person } from "@material-ui/icons";
 
 var absensiTable = React.lazy(()=>import ("../components/AbsensiDataTableComponent"));
 var locationTable = React.lazy(()=>import ("../components/AddLocationTable"));
+var userList = React.lazy(()=>import ("../components/UserListDataTableComponent"));
 
 const drawerWidth = 240;
 
@@ -61,7 +62,8 @@ const useStyle = makeStyles((theme: Theme) =>
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen
             }),
-            marginLeft: -drawerWidth
+            marginLeft: -drawerWidth,
+            overscrollBehaviorY:"auto"
         },
         contentShift: {
             flexGrow: 1,
@@ -70,7 +72,8 @@ const useStyle = makeStyles((theme: Theme) =>
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen
             }),
-            marginLeft: 0
+            marginLeft: 0,
+            overscrollBehaviorY:"auto"
         },
         toolbar: theme.mixins.toolbar
     })
@@ -82,7 +85,7 @@ export default function Dashboard() {
     const classes = useStyle();
     console.log("test");
     return (
-        <div className={classes.root}>
+        <div style={{position:"relative"}} className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
@@ -151,7 +154,8 @@ export default function Dashboard() {
                         path="/dashboard"
                         component={absensiTable}
                         exact
-                    ></Route>
+                    />
+                    <Route path="/dashboard/userlist" component={userList} />
             </main>
         </div>
 

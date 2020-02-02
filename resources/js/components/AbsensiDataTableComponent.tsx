@@ -33,7 +33,9 @@ export default function  AbsensiDataTableComponent(){
             {
                 search:false,
                 emptyRowsWhenPaging:false,
+                pageSize:5,
                 pageSizeOptions:[]
+
             }
         }
 

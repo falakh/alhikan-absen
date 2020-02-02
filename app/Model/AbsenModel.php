@@ -27,7 +27,7 @@ class AbsenModel extends Model
 
     public function getAllData(){
         return DB::table($this->getTable())
-            ->select($this->getTable().".created_at",'users.name','cabang.name')
+            ->select($this->getTable().".created_at",'users.name as name','cabang.name as cabang')
             ->join('users','users.id','=',$this->getTable().".cabangId")
             ->join('cabang','cabang.id','=',$this->getTable().".cabangId")->get();
 

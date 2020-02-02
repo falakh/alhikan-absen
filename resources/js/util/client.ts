@@ -32,3 +32,7 @@ export async function addLokasi(cabang : Cabang) {
         "addres":cabang.addres
     })
 }
+
+export async function getAllUser(){
+    return Axios.get('/api/getAllUser');
+}

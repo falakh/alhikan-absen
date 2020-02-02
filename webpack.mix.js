@@ -44,4 +44,9 @@ mix.react('resources/js/app.js', 'public/js')
       },
       extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
     }
-  });
+  }).version();
+
+  if (mix.inProduction()) {
+    mix.version();
+}
+  
