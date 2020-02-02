@@ -15,20 +15,8 @@ mix.react('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .extract(['react', '@material-ui/core', '@material-ui/icons'])
   .setPublicPath("/")
-  
   .webpackConfig({
-    entry: {
-      index: './resources/js/app.js',
-    },
-    output: {
-      filename: '[name].js',
-      chunkFilename: '[name].js',
-      // `path` is the folder where Webpack will place your bundles
-      path: __dirname + '/',
-      // `publicPath` is where Webpack will load your bundles from (optional)
-      publicPath: __dirname + 'dist/'
-    },
-    module: {
+      module: {
       rules: [
         {
           test: /\.tsx?$/,
@@ -40,10 +28,10 @@ mix.react('resources/js/app.js', 'public/js')
     resolve: {
       alias: {
         '@material-ui/core': '@material-ui/core/esm',
-        '@material-ui/icons': '@material-ui/icons/esm'
+        '@material-ui/icons': '@material-ui/icons/esm',
       },
       extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
     }
-  });
+  }).version();
 
   
