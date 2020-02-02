@@ -28,8 +28,8 @@
 <div id="example"></div>
 
 
-<script src="{{ mix('js/manifest.js') }}"></script>
-<script src="{{ mix('js/vendor.js') }}"></script>
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ secure_asset('js/manifest.js') }}"></script>
+<script src="{{ secure_asset('js/vendor.js') }}"></script>
+<script src="{{ secure_asset('js/app.js') }}"></script>
 </body>
 </html>
