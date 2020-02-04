@@ -16,7 +16,8 @@ mix.react('resources/js/app.js', 'public/js')
   .extract(['react', '@material-ui/core', '@material-ui/icons'])
   .setPublicPath("/")
   .webpackConfig({
-      module: {
+   
+    module: {
       rules: [
         {
           test: /\.tsx?$/,
@@ -32,6 +33,9 @@ mix.react('resources/js/app.js', 'public/js')
       },
       extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
     }
-  }).version();
+  });
+mix.babelConfig({
+  plugins: ['@babel/plugin-syntax-dynamic-import'],
+});
 
-  
+mix.version();

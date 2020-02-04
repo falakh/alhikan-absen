@@ -1,8 +1,11 @@
-import Dashboard from "./Dashboard";
-import React from "react";
+
+import React, { Suspense } from "react";
+
+var dashboard = React.lazy(()=> import(/* webpackChunkName: "dashboard" */'./Dashboard'))
 
 function AdminPage(){
     
-    return <Dashboard/>
+    return <Suspense fallback={<div></div>}> {dashboard} </Suspense>
+    
 }
 export default AdminPage;

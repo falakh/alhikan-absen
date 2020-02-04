@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Card, CardContent, Container, TextField} from "@material-ui/core";
+import {Button, Card, CardContent, Container, TextField} from "@material-ui/core/esm";
 import {Login} from "../util/client";
 
 export default function LoginCard() {

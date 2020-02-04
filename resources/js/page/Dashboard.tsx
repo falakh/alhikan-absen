@@ -20,13 +20,10 @@ import {
     Toolbar,
     Typography
 } from "@material-ui/core";
-import React, { Suspense } from "react";
+import React from "react";
 import { CalendarToday, Menu, PinDrop, Person } from "@material-ui/icons";
 
 
-var absensiTable = React.lazy(()=>import ("../components/AbsensiDataTableComponent"));
-var locationTable = React.lazy(()=>import ("../components/AddLocationTable"));
-var userList = React.lazy(()=>import ("../components/UserListDataTableComponent"));
 
 const drawerWidth = 240;
 
@@ -148,14 +145,14 @@ export default function Dashboard() {
                 <div className={classes.drawerHeader} />
                     <Route
                         path="/dashboard/lokasi"
-                        component={locationTable}
+                        render={()=>import('../components/AddLocationTable')}
                     ></Route>
                     <Route
                         path="/dashboard"
-                        component={absensiTable}
+                        render={()=>import('../components/AbsensiDataTableComponent')}
                         exact
                     />
-                    <Route path="/dashboard/userlist" component={userList} />
+                    <Route path="/dashboard/userlist" render={()=>import('../components/UserListDataTableComponent')} />
             </main>
         </div>
 
