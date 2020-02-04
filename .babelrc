@@ -1,0 +1,15 @@
+{
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import"
+      ,"@babel/transform-runtime",
+      [
+        "import",
+        {
+          "libraryName": "@material-ui/core",
+          "libraryDirectory": "esm",
+          "camel2DashComponentName": false
+        }
+      ]
+       
+    ]
+  }

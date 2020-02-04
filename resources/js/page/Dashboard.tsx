@@ -3,7 +3,8 @@ import {
     Link,
     Route,
     useRouteMatch,
-    BrowserRouter as Router
+    BrowserRouter as Router,
+    NavLink
 } from "react-router-dom";
 import {
     AppBar,
@@ -21,9 +22,6 @@ import {
     Typography
 } from "@material-ui/core";
 import React from "react";
-import { CalendarToday, Menu, PinDrop, Person } from "@material-ui/icons";
-
-
 
 const drawerWidth = 240;
 
@@ -60,7 +58,7 @@ const useStyle = makeStyles((theme: Theme) =>
                 duration: theme.transitions.duration.leavingScreen
             }),
             marginLeft: -drawerWidth,
-            overscrollBehaviorY:"auto"
+            overscrollBehaviorY: "auto"
         },
         contentShift: {
             flexGrow: 1,
@@ -70,7 +68,7 @@ const useStyle = makeStyles((theme: Theme) =>
                 duration: theme.transitions.duration.enteringScreen
             }),
             marginLeft: 0,
-            overscrollBehaviorY:"auto"
+            overscrollBehaviorY: "auto"
         },
         toolbar: theme.mixins.toolbar
     })
@@ -82,7 +80,7 @@ export default function Dashboard() {
     const classes = useStyle();
     console.log("test");
     return (
-        <div style={{position:"relative"}} className={classes.root}>
+        <div style={{ position: "relative" }} className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
@@ -93,7 +91,7 @@ export default function Dashboard() {
                         color="inherit"
                         aria-label="menu"
                     >
-                        <Menu />
+                        <div className="material-icons">menu</div>
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         Sistem Kehadiran
@@ -110,30 +108,42 @@ export default function Dashboard() {
             >
                 <div className={classes.toolbar} />
                 <List>
-                    <Link to="/dashboard">
+                    <NavLink
+                        to="/dashboard"
+                        className="nav-link"
+                        style={{ textDecoration: "none" }}
+                    >
                         <ListItem button>
                             <ListItemIcon>
-                                <CalendarToday />
+                                <div className="material-icons">today</div>
                             </ListItemIcon>
                             <ListItemText primary="Kehadiran" />
                         </ListItem>
-                    </Link>
-                    <Link to="/dashboard/lokasi">
+                    </NavLink>
+                    <NavLink
+                        className="nav-link"
+                        to="/dashboard/lokasi"
+                        style={{ textDecoration: "none" }}
+                    >
                         <ListItem button>
                             <ListItemIcon>
-                                <PinDrop />
+                                <div className="material-icons">pin_drop</div>
                             </ListItemIcon>
                             <ListItemText primary="Lokasi" />
                         </ListItem>
-                    </Link>
-                    <Link to="/dashboard/userList">
+                    </NavLink>
+                    <NavLink
+                        className="nav-link"
+                        to="/dashboard/userList"
+                        style={{ textDecoration: "none" }}
+                    >
                         <ListItem button>
                             <ListItemIcon>
-                                <Person />
+                                <div className="material-icons">person</div>
                             </ListItemIcon>
                             <ListItemText primary="UserList" />
                         </ListItem>
-                    </Link>
+                    </NavLink>
                 </List>
             </Drawer>
             <main
@@ -143,18 +153,26 @@ export default function Dashboard() {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                    <Route
-                        path="/dashboard/lokasi"
-                        render={()=>import('../components/AddLocationTable')}
-                    ></Route>
-                    <Route
-                        path="/dashboard"
-                        render={()=>import('../components/AbsensiDataTableComponent')}
-                        exact
-                    />
-                    <Route path="/dashboard/userlist" render={()=>import('../components/UserListDataTableComponent')} />
+                <Route
+                    path="/dashboard/lokasi"
+                    component={React.lazy(() =>
+                        import("../components/AddLocationTable")
+                    )}
+                ></Route>
+                <Route
+                    path="/dashboard"
+                    component={React.lazy(() =>
+                        import("../components/AbsensiDataTableComponent")
+                    )}
+                    exact
+                />
+                <Route
+                    path="/dashboard/userlist"
+                    component={React.lazy(() =>
+                        import(/* webpackPrefetch: true */ "../components/UserListDataTableComponent")
+                    )}
+                />
             </main>
         </div>
-
     );
 }

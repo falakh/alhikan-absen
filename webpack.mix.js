@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const { BundleStatsWebpackPlugin } = require('bundle-stats');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,11 +13,11 @@ const mix = require('laravel-mix');
  */
 
 mix.react('resources/js/app.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css')
-  .extract(['react', '@material-ui/core', '@material-ui/icons'])
-  .setPublicPath("/")
-  .webpackConfig({
-   
+.extract(['react','@material-ui/core','material-table','react-router-dom','react-async'])
+.webpackConfig({
+    plugins: [
+      new BundleStatsWebpackPlugin()
+    ],
     module: {
       rules: [
         {
@@ -27,15 +28,9 @@ mix.react('resources/js/app.js', 'public/js')
       ]
     },
     resolve: {
-      alias: {
-        '@material-ui/core': '@material-ui/core/esm',
-        '@material-ui/icons': '@material-ui/icons/esm',
-      },
       extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
     }
-  });
-mix.babelConfig({
-  plugins: ['@babel/plugin-syntax-dynamic-import'],
-});
+  }).babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
+  }).version()
 
-mix.version();
