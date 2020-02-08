@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {AttedanceUser} from "../type/TypeList";
+import { AttedanceUser } from "../type/AttedanceUser";
 import MaterialTable from "material-table";
 import {useAsync} from "react-async";
 import {getAllAbsensi, getAllLokasi} from "../util/client";

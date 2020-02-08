@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Button,
     CircularProgress,
@@ -12,69 +12,68 @@ import {
     TextField,
     Theme,
     withStyles,
-    InputAdornment
+    InputAdornment,
+    Typography
 } from "@material-ui/core";
 import { getAllLokasi, addLokasi } from "../util/client";
 import { useAsync } from "react-async";
 import MaterialTable from "material-table";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import { GetAllCabangAction } from "../redux/action/LocationListAction/CabangListAction";
 
 export default function LocationTable() {
-    const { data, error, isLoading } = useAsync({ promiseFn: getAllLokasi });
+    // const { data, error, isLoading } = useAsync({ promiseFn: getAllLokasi });
+    var cabangState = (state: RootState) => state.cabang;
     var [isEdit, setEdit] = useState(false);
-    if (isLoading) {
-        return (
-            <div>
-                <CircularProgress
-                    style={{ marginTop: "20%", marginLeft: "50%" }}
-                />
-                {DialogEdit(isEdit, () => setEdit(false))}
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div>
-                {DialogEdit(isEdit, () => setEdit(false))}
-                ini err
-            </div>
-        );
-    }
-
-    if (data) {
-        return (
-            <div>
-                {DialogEdit(isEdit, () => setEdit(false))}
-                <MaterialTable
-                    options={{
-                        search: false,
-                        emptyRowsWhenPaging: false,
-                        pageSizeOptions: []
-                    }}
-                    actions={[
-                        {
-                            icon: "add",
-                            tooltip: "Add User",
-                            isFreeAction: true,
-                            onClick: event => setEdit(true)
-                        }
-                    ]}
-                    title={"Lokasi"}
-                    columns={[
-                        { title: "Name", field: "name" },
-                        { title: "Alamat", field: "addres" },
-                        { title: "latitude", field: "latitude" },
-                        { title: "longitude", field: "longitude" }
-                    ]}
-                    data={data}
-                />
-            </div>
-        );
-    }
-    return <div>Ini loading</div>;
+    var cabang = useSelector(cabangState);
+    var dispatch = useDispatch();
+    useEffect(() => {
+        if (!cabang.isFound) {
+            dispatch(GetAllCabangAction());
+        }
+    });
+    return (
+        <div>
+            {cabang.isLoading && (
+                <Dialog open maxWidth="md" disableBackdropClick disableEscapeKeyDown>
+                    <DialogContent>
+                        <CircularProgress style={{marginLeft:"50%"}}/>
+                        <DialogContentText  style={{marginTop:20}}>
+                            <Typography> Tolong Menunggu </Typography>
+                        </DialogContentText>
+                    </DialogContent>
+                </Dialog>
+            )}
+            {DialogEdit(isEdit, () => setEdit(false))}
+            <MaterialTable
+                options={{
+                    search: false,
+                    emptyRowsWhenPaging: false,
+                    pageSizeOptions: []
+                }}
+                actions={[
+                    {
+                        icon: "add",
+                        tooltip: "Add User",
+                        isFreeAction: true,
+                        onClick: event => setEdit(true)
+                    }
+                ]}
+                title={"Lokasi"}
+                columns={[
+                    { title: "Name", field: "name" },
+                    { title: "Alamat", field: "addres" },
+                    { title: "latitude", field: "latitude" },
+                    { title: "longitude", field: "longitude" }
+                ]}
+                data={cabang.data}
+            />
+        </div>
+    );
 }
 
-function getLocation(succesCallback :PositionCallback) {
+function getLocation(succesCallback: PositionCallback) {
     if (window.navigator && window.navigator.geolocation) {
         window.navigator.geolocation.getCurrentPosition(
             position => {
@@ -130,7 +129,7 @@ function DialogEdit(show: boolean, onClose: any) {
                         onChange={event => setAlamat(event.target.value)}
                         fullWidth
                     />
-                      <TextField
+                    <TextField
                         value={radius}
                         label="Radius"
                         placeholder="Radius"
@@ -141,16 +140,24 @@ function DialogEdit(show: boolean, onClose: any) {
                         placeholder={"Koordinat"}
                         fullWidth
                         disabled
-                        value={latitude+" , "+longitude}
+                        value={latitude + " , " + longitude}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
-                                    <Button onClick={(event)=>getLocation(
-                                        position => {
-                                            setLongitude(position.coords.longitude);
-                                            setLatitude(position.coords.latitude);
+                                    <Button
+                                        onClick={event =>
+                                            getLocation(position => {
+                                                setLongitude(
+                                                    position.coords.longitude
+                                                );
+                                                setLatitude(
+                                                    position.coords.latitude
+                                                );
+                                            })
                                         }
-                                    )}>Get Lokasi</Button>
+                                    >
+                                        Get Lokasi
+                                    </Button>
                                 </InputAdornment>
                             )
                         }}
@@ -161,18 +168,24 @@ function DialogEdit(show: boolean, onClose: any) {
                 <Button autoFocus color="primary">
                     Cancel
                 </Button>
-                <Button color="primary" autoFocus onClick={(event)=>{
-                    addLokasi({
-                        addres: alamat,
-                        latitude:latitude,
-                        longitude:longitude,
-                        created_at:"",
-                        id:0,
-                        name:nama,
-                        radius:radius as unknown as number,
-                        updated_at:"",
-                    }).then(hasil => {window.location.reload()})
-                }}>
+                <Button
+                    color="primary"
+                    autoFocus
+                    onClick={event => {
+                        addLokasi({
+                            addres: alamat,
+                            latitude: latitude,
+                            longitude: longitude,
+                            created_at: "",
+                            id: 0,
+                            name: nama,
+                            radius: (radius as unknown) as number,
+                            updated_at: ""
+                        }).then(hasil => {
+                            window.location.reload();
+                        });
+                    }}
+                >
                     Send
                 </Button>
             </DialogActions>

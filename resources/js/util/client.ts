@@ -1,16 +1,22 @@
 import Axios from "axios";
-import {LoginInput, LoginEvent, Cabang, AttedanceUser} from "../type/TypeList";
-import {async} from "q";
+import { LoginInput } from "../type/LoginInput";
+import { AttedanceUser } from "../type/AttedanceUser";
+import { LoginEvent } from "../type/LoginEvent";
+import { Cabang } from "../type/Cabang";
 
 
 export async function Login(loginInput : LoginInput,loginEvent? : LoginEvent){
     try{
-        var hasil = await Axios.post("/api/login",loginInput)
+        var hasil = await LoginRequestOnly(loginInput)
         loginEvent?.OnSucces(hasil.data)
     }catch(eror){
         console.log(eror);
         loginEvent?.OnEror(eror)
     }
+}
+
+export async function LoginRequestOnly(loginInput : LoginInput){
+    return await Axios.post("/api/login",loginInput)
 }
 
 export async function getAllLokasi(){

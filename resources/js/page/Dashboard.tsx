@@ -22,6 +22,7 @@ import {
     Typography
 } from "@material-ui/core";
 import React from "react";
+import { NavBar } from "../components/NavBar";
 
 const drawerWidth = 240;
 
@@ -78,74 +79,10 @@ export default function Dashboard() {
 
     var handleMenuButton = () => setOpenDrawer(!openDrawer);
     const classes = useStyle();
-    console.log("test");
     return (
         <div style={{ position: "relative" }} className={classes.root}>
             <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <IconButton
-                        about="Menu"
-                        onClick={handleMenuButton}
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                    >
-                        <div className="material-icons">menu</div>
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Sistem Kehadiran
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant="persistent"
-                open={openDrawer}
-                className={classes.drawer}
-                classes={{
-                    paper: classes.drawerPaper
-                }}
-            >
-                <div className={classes.toolbar} />
-                <List>
-                    <NavLink
-                        to="/dashboard"
-                        className="nav-link"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <div className="material-icons">today</div>
-                            </ListItemIcon>
-                            <ListItemText primary="Kehadiran" />
-                        </ListItem>
-                    </NavLink>
-                    <NavLink
-                        className="nav-link"
-                        to="/dashboard/lokasi"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <div className="material-icons">pin_drop</div>
-                            </ListItemIcon>
-                            <ListItemText primary="Lokasi" />
-                        </ListItem>
-                    </NavLink>
-                    <NavLink
-                        className="nav-link"
-                        to="/dashboard/userList"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <div className="material-icons">person</div>
-                            </ListItemIcon>
-                            <ListItemText primary="UserList" />
-                        </ListItem>
-                    </NavLink>
-                </List>
-            </Drawer>
+            {NavBar(handleMenuButton)}
             <main
                 className={clsx({
                     [classes.content]: !openDrawer,
