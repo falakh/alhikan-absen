@@ -62,4 +62,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+     public function getUserData($username,$password)
+    {
+        return User::where('email',$username)->where("password",$password) -> first();
+    }
 }

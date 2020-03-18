@@ -2,7 +2,7 @@ import { UserActionTypes, LOGIN_LOADING, LOGIN_SUCCES, UserLoginSucces, UserLogi
 import { LoginInput } from "../../../type/LoginInput";
 import { User } from "../../../type/User";
 import { ThunkAction } from "redux-thunk";
-import { LoginRequestOnly } from "../../../util/client";
+import { loginRequestOnly } from "../../../util/client";
 import { RootState } from "../../store";
 import { Action } from "redux";
 
@@ -12,7 +12,7 @@ export const userLogin = (
         return async (dispatch) => {
             try {
                 dispatch(UserAwait());
-                const asyncResp = await LoginRequestOnly(user);
+                const asyncResp = await loginRequestOnly(user);
                 var hasil: UserLoginSucces = {
                     payload: asyncResp.data as User,
                     type: LOGIN_SUCCES

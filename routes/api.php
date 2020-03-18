@@ -26,6 +26,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/absenPegawai','AbsenController@PegawaiAbsen');
     Route::get('/getAllAbsen','AbsenController@getAllData');
     Route::get('/getAllUser',"UserListController@getAllUser");
+    Route::post("/addJabatan","JabtanController@addJabtan");
+    Route::get("/getAllJabatan","JabtanController@getAllJabatan");
+    Route::post("/mobileLogin","LoginController@LoginFromMobile");
+    Route::get("/allMobileUser","MobileUserController@getAllUser");
+    Route::post("/deleteMobileUser","MobileUserController@deleteMobileUser");
 
 
 });

@@ -3,11 +3,12 @@ import { LoginInput } from "../type/LoginInput";
 import { AttedanceUser } from "../type/AttedanceUser";
 import { LoginEvent } from "../type/LoginEvent";
 import { Cabang } from "../type/Cabang";
+import { Jabatan } from "../type/Jabatan";
 
 
 export async function Login(loginInput : LoginInput,loginEvent? : LoginEvent){
     try{
-        var hasil = await LoginRequestOnly(loginInput)
+        var hasil = await loginRequestOnly(loginInput)
         loginEvent?.OnSucces(hasil.data)
     }catch(eror){
         console.log(eror);
@@ -15,8 +16,12 @@ export async function Login(loginInput : LoginInput,loginEvent? : LoginEvent){
     }
 }
 
-export async function LoginRequestOnly(loginInput : LoginInput){
+export async function loginRequestOnly(loginInput : LoginInput){
     return await Axios.post("/api/login",loginInput)
+}
+
+export async function getAllJabatanData(){
+    return await (await Axios.get("api/getAllJabatan")).data as Jabatan[]
 }
 
 export async function getAllLokasi(){
