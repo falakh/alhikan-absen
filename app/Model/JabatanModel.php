@@ -5,6 +5,7 @@ namespace App\Model;
 use Facade\FlareClient\Time\Time;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\This;
 
 /**
  * @property integer id
@@ -29,18 +30,22 @@ class JabatanModel extends Model
     }
 
     function getJabatanData($namaJabtan){
-        return JabatanModel::all("*")
-            ->where("jabtan","=",$namaJabtan)
-            ->get();
+        return JabatanModel::where("jabtan","=",$namaJabtan)->get();
     }
 
-    function updateJabtan($id,$nama,$jamMasuk,$jamPulang,$toleransiDatang,$toleransiPulang){
-       $this->id=$id;
-       $this->jamMasuk=$jamMasuk;
-       $this->jamPulang=$jamPulang;
-       $this->toleransiDatang=$toleransiDatang;
-       $this->toleransiPulang=$toleransiDatang;
-       $this->save();
+    function updateJabatan($id,$nama,$jamMasuk,$jamPulang,$toleransiDatang,$toleransiPulang){
+        $targetJabatan = JabatanModel::find($id);
+       $targetJabatan->jamMasuk=$jamMasuk;
+       $targetJabatan->jamPulang=$jamPulang;
+       $targetJabatan->jabtan=$nama;
+       $targetJabatan->toleransiDatang=$toleransiDatang;
+       $targetJabatan->toleransiPulang=$toleransiPulang;
+        $hasil = $targetJabatan->save();
+        $targetJabatan = JabatanModel::find($id);
+        if($hasil){
+            return ["status"=> "sukses","message"=>"data berhasil diubah","data"=>$targetJabatan];
+        }
+        return ["status"=> "failed","message"=>"data gagal diubah","data"=>null];
     }
 
 }

@@ -44,6 +44,7 @@ function RouterComponent() {
                     path="/dashboard"
                     component={React.lazy(() => import("./Dashboard"))}
                 />
+
                 <Route exact path="/"></Route>
             </Suspense>
         </Router>

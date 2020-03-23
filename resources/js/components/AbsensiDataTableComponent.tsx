@@ -54,8 +54,7 @@ function DialogEdit(show: boolean) {
     return <Dialog
         fullScreen={false}
         open={show}
-        aria-labelledby="responsive-dialog-title"
-    >
+        aria-labelledby="responsive-dialog-title">
         <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
         <DialogContent>
             <DialogContentText>

@@ -24,8 +24,8 @@ import { GetAllCabangAction } from "../redux/action/LocationListAction/CabangLis
 
 export default function LocationTable() {
     // const { data, error, isLoading } = useAsync({ promiseFn: getAllLokasi });
-    var cabangState = (state: RootState) => state.cabang;
     var [isEdit, setEdit] = useState(false);
+    var cabangState = (state: RootState) => state.cabang;
     var cabang = useSelector(cabangState);
     var dispatch = useDispatch();
     useEffect(() => {

@@ -60,7 +60,7 @@ class MobileLoginModel extends Model
         if($delteStatus){
             return ["status"=> "sukses"];
         }else{
-            return ["status"=> "faild"];
+            return ["status"=> "failed"];
         }
     }
 

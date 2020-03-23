@@ -23,6 +23,9 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { NavBar } from "../components/NavBar";
+import { useSelector, useDispatch } from "react-redux";
+import { setDrawer } from "../redux/action/UIAction/UIActionLIst";
+import { RootState } from "../redux/store";
 
 const drawerWidth = 240;
 
@@ -75,18 +78,20 @@ const useStyle = makeStyles((theme: Theme) =>
     })
 );
 export default function Dashboard() {
-    var [openDrawer, setOpenDrawer] = React.useState(false);
-
-    var handleMenuButton = () => setOpenDrawer(!openDrawer);
+    // var [openDrawer, setOpenDrawer] = React.useState(false);
+    var cabangState = (state: RootState) => state.ui
+    var uiState = useSelector(cabangState);
+    var dispatch = useDispatch();
+    var handleMenuButton = () => dispatch(setDrawer(!uiState.isDrawerOpen));
     const classes = useStyle();
     return (
         <div style={{ position: "relative" }} className={classes.root}>
             <CssBaseline />
-            {NavBar(handleMenuButton)}
+            {NavBar()}
             <main
                 className={clsx({
-                    [classes.content]: !openDrawer,
-                    [classes.contentShift]: openDrawer
+                    [classes.content]: !uiState.isDrawerOpen,
+                    [classes.contentShift]: uiState.isDrawerOpen
                 })}
             >
                 <div className={classes.drawerHeader} />
@@ -108,6 +113,9 @@ export default function Dashboard() {
                     component={React.lazy(() =>
                         import(/* webpackPrefetch: true */ "../components/UserListDataTableComponent")
                     )}
+                />
+                  <Route path="/dashboard/mobileUser"
+                    component={/* webpackPrefetch: true */ React.lazy(()=>import("../components/JabatanTableList"))}
                 />
             </main>
         </div>

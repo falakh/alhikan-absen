@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles, Theme, createStyles, AppBar, Toolbar, IconButton, Typography, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import {setDrawer} from "../redux/action/UIAction/UIActionLIst";
 
 const drawerWidth = 240;
 
@@ -53,9 +56,12 @@ const useStyle = makeStyles((theme: Theme) =>
     })
 );
 
-export function NavBar(onClick: ()=> void) {
-    var [openDrawer, setOpenDrawer] = React.useState(false);
-    var handleMenuButton = () => {setOpenDrawer(!openDrawer); onClick()};
+export function NavBar() {
+    // var [openDrawer, setOpenDrawer] = React.useState(false);
+    var cabangState = (state: RootState) => state.ui
+    var uiState = useSelector(cabangState);
+    var dispatch = useDispatch();
+    var handleMenuButton = () => dispatch(setDrawer(!uiState.isDrawerOpen));
     const classes = useStyle();
 
    return <div>
@@ -77,7 +83,7 @@ export function NavBar(onClick: ()=> void) {
             </AppBar>
             <Drawer
                 variant="persistent"
-                open={openDrawer}
+                open={uiState.isDrawerOpen}
                 className={classes.drawer}
                 classes={{
                     paper: classes.drawerPaper
@@ -121,8 +127,20 @@ export function NavBar(onClick: ()=> void) {
                             <ListItemText primary="UserList" />
                         </ListItem>
                     </NavLink>
+                    <NavLink
+                        className="nav-link"
+                        to="/dashboard/mobileUser"
+                        style={{ textDecoration: "none" }}
+                    >
+                        <ListItem button>
+                            <ListItemIcon>
+                                <div className="material-icons">mobile_screen_share</div>
+                            </ListItemIcon>
+                            <ListItemText primary="Mobile User" />
+                        </ListItem>
+                    </NavLink>
                 </List>
             </Drawer>
    </div>
-  
+
 }
