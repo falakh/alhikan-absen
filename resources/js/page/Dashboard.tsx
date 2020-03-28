@@ -1,30 +1,14 @@
 import clsx from "clsx";
 import {
-    Link,
-    Route,
-    useRouteMatch,
-    BrowserRouter as Router,
-    NavLink
-} from "react-router-dom";
+    Route} from "react-router-dom";
 import {
-    AppBar,
     createStyles,
     CssBaseline,
-    Drawer,
-    IconButton,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
     makeStyles,
-    Theme,
-    Toolbar,
-    Typography
-} from "@material-ui/core";
+    Theme} from "@material-ui/core";
 import React from "react";
 import { NavBar } from "../components/NavBar";
 import { useSelector, useDispatch } from "react-redux";
-import { setDrawer } from "../redux/action/UIAction/UIActionLIst";
 import { RootState } from "../redux/store";
 
 const drawerWidth = 240;
@@ -78,11 +62,8 @@ const useStyle = makeStyles((theme: Theme) =>
     })
 );
 export default function Dashboard() {
-    // var [openDrawer, setOpenDrawer] = React.useState(false);
     var cabangState = (state: RootState) => state.ui
     var uiState = useSelector(cabangState);
-    var dispatch = useDispatch();
-    var handleMenuButton = () => dispatch(setDrawer(!uiState.isDrawerOpen));
     const classes = useStyle();
     return (
         <div style={{ position: "relative" }} className={classes.root}>
@@ -98,13 +79,12 @@ export default function Dashboard() {
                 <Route
                     path="/dashboard/lokasi"
                     component={React.lazy(() =>
-                        import("../components/AddLocationTable")
-                    )}
-                ></Route>
+                        import(/* webpackPrefetch: true */"../components/AddLocationTable"))}
+                />
                 <Route
                     path="/dashboard"
                     component={React.lazy(() =>
-                        import("../components/AbsensiDataTableComponent")
+                        import(/* webpackPrefetch: true */"../components/AbsensiDataTableComponent")
                     )}
                     exact
                 />

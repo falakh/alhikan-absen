@@ -1,33 +1,20 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { connect, Provider } from "react-redux";
-import { UserState } from "../redux/state/UserState";
+import { Provider } from "react-redux";
 import { RootState } from "../redux/store";
 import { Store } from "redux";
 import {} from '../redux/action/UserAction/UserAction'
-interface DispatchProps {
-    toggleOn: () => void;
-}
 
-interface OwnProps {
-    backgroundColor: string;
-}
 
-const mapState = (state: RootState) => {
-    user: state.user;
-};
 
-type Props = DispatchProps & OwnProps;
 
 interface MainProps {
     store: Store<RootState>;
 }
-var conect =  connect(mapState)(Router);
-
-export function App(props: MainProps) {
+export default function App(props: MainProps) {
     return (
         <Provider store={props.store}>
-            <RouterComponent />
+        <RouterComponent />
         </Provider>
     );
 }
@@ -42,7 +29,7 @@ function RouterComponent() {
                 />
                 <Route
                     path="/dashboard"
-                    component={React.lazy(() => import("./Dashboard"))}
+                    component={React.lazy(() => import(/* webpackChunkName: "dashboard" */"./Dashboard"))}
                 />
 
                 <Route exact path="/"></Route>

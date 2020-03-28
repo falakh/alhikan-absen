@@ -13,10 +13,10 @@ const { BundleStatsWebpackPlugin } = require('bundle-stats');
  */
 
 mix.react('resources/js/app.js', 'public/js')
-.extract(['react','@material-ui/core','material-table','react-router-dom','react-async'])
+.extract()
 .webpackConfig({
     plugins: [
-      new BundleStatsWebpackPlugin()
+    //   new BundleStatsWebpackPlugin()
     ],
     module: {
       rules: [
