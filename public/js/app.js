@@ -1,1 +1,1069 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{0:function(e,t,a){e.exports=a("bUC5")},"4Lxk":function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.USER_LOGIN="USER_LOGIN",t.LOGIN_SUCCES="USER_LOGIN_SUCCES",t.LOGIN_FAILED="USER_LOGIN_FAILED",t.LOGIN_LOADING="USER_LOGIN_LOADING"},"6dGr":function(e,t,a){"use strict";var n=this&&this.__awaiter||function(e,t,a,n){return new(a||(a=Promise))((function(l,i){function r(e){try{u(n.next(e))}catch(e){i(e)}}function o(e){try{u(n.throw(e))}catch(e){i(e)}}function u(e){var t;e.done?l(e.value):(t=e.value,t instanceof a?t:new a((function(e){e(t)}))).then(r,o)}u((n=n.apply(e,t||[])).next())}))},l=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const i=l(a("vDqi"));function r(e){return n(this,void 0,void 0,(function*(){return yield i.default.post("/api/login",e)}))}t.Login=function(e,t){var a,l;return n(this,void 0,void 0,(function*(){try{var n=yield r(e);null===(a=t)||void 0===a||a.OnSucces(n.data)}catch(e){console.log(e),null===(l=t)||void 0===l||l.OnEror(e)}}))},t.loginRequestOnly=r,t.getAllJabatanData=function(){return n(this,void 0,void 0,(function*(){return yield(yield i.default.get("api/getAllJabatan")).data}))},t.getAllLokasi=function(){return n(this,void 0,void 0,(function*(){return(yield i.default.post("/api/getAllCabang")).data}))},t.getAllAbsensi=function(){return n(this,void 0,void 0,(function*(){return(yield i.default.get("/api/getAllAbsen")).data}))},t.addLokasi=function(e){return n(this,void 0,void 0,(function*(){return i.default.post("/api/addCabang",{latitude:e.latitude,longitude:e.longitude,name:e.name,radius:e.radius,addres:e.addres})}))},t.getAllUser=function(){return n(this,void 0,void 0,(function*(){return i.default.get("/api/getAllUser")}))}},"8K3A":function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=a("4Lxk"),l={data:null,isAdmin:!1,isLogin:!1,isEror:!1,isLoading:!1};t.userReducer=function(e=l,t){switch(t.type){case n.LOGIN_LOADING:return{data:null,isAdmin:!1,isEror:!1,isLoading:!0,isLogin:!1};case n.LOGIN_SUCCES:return{data:t.payload,isAdmin:!1,isEror:!1,isLoading:!1,isLogin:!0};case n.LOGIN_FAILED:return{data:null,isAdmin:!1,isEror:!1,isLoading:!0,isLogin:!0};default:return e}}},Ctfv:function(e,t,a){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var a in e)Object.hasOwnProperty.call(e,a)&&(t[a]=e[a]);return t.default=e,t},l=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const i=n(a("q1tI")),r=a("TTf+"),o=l(a("CvGJ"));class u extends i.Component{render(){return i.default.createElement(r.Container,{maxWidth:"xl",style:{height:"100%",width:"100%",margin:0,backgroundColor:"#32415a",display:"flex"}},i.default.createElement(o.default,null))}}t.default=u},CvGJ:function(e,t,a){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const l=n(a("q1tI")),i=a("TTf+"),r=a("6dGr"),o=a("/MKj"),u=a("u2td");t.default=function(){const[e,t]=l.default.useState(""),[a,n]=l.default.useState(""),s=o.useSelector(e=>e.user.isLoading),d=o.useDispatch();return console.log(s),l.default.createElement(i.Container,{maxWidth:"xs",style:{transform:"translate(0%,15%)"}},l.default.createElement(i.Card,{elevation:10},l.default.createElement(i.CardContent,null,l.default.createElement(i.TextField,{fullWidth:!0,placeholder:"Email@mail.com",label:"Email",onChange:e=>{t(e.target.value)}})),l.default.createElement(i.CardContent,null,l.default.createElement(i.TextField,{fullWidth:!0,placeholder:"*****",label:"Password",type:"password",onChange:e=>{n(e.target.value)}})),l.default.createElement(i.CardContent,null,l.default.createElement(i.Button,{disabled:s,fullWidth:!0,color:"primary",onClick:()=>{d(u.userLogin({email:e,password:a})),r.Login({email:e,password:a},{OnEror:e=>alert(e),OnSucces:e=>console.log(e)})},variant:"outlined"},"Login"))))}},Fkm8:function(e,t,a){"use strict";var n=this&&this.__awaiter||function(e,t,a,n){return new(a||(a=Promise))((function(l,i){function r(e){try{u(n.next(e))}catch(e){i(e)}}function o(e){try{u(n.throw(e))}catch(e){i(e)}}function u(e){var t;e.done?l(e.value):(t=e.value,t instanceof a?t:new a((function(e){e(t)}))).then(r,o)}u((n=n.apply(e,t||[])).next())}))};Object.defineProperty(t,"__esModule",{value:!0});const l=a("6dGr"),i=a("T3cl");t.GetAllCabangAction=function(){return e=>n(this,void 0,void 0,(function*(){try{e({type:i.GET_LOCATIONLIST_LOADNG});var t=yield l.getAllLokasi();console.log(t);var a={payload:t,type:i.GET_LOCATIONLIST_SUCCES};e(a)}catch(t){e({type:i.GET_LOCATIONLIST_FAILED}),console.log("eror gan")}}))}},JcH6:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=a("8K3A"),l=a("ANjH"),i=a("U28T"),r=a("xt7p");t.rootReducer=l.combineReducers({user:n.userReducer,cabang:i.cabangReducer,ui:r.UIReducer})},R6f2:function(e,t,a){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var a in e)Object.hasOwnProperty.call(e,a)&&(t[a]=e[a]);return t.default=e,t},l=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const i=n(a("q1tI")),r=a("TTf+"),o=a("6dGr"),u=l(a("27Dn")),s=a("/MKj"),d=a("Fkm8");t.default=function(){var[e,t]=i.useState(!1),a=s.useSelector(e=>e.cabang),n=s.useDispatch();return i.useEffect(()=>{a.isFound||n(d.GetAllCabangAction())}),i.default.createElement("div",null,a.isLoading&&i.default.createElement(r.Dialog,{open:!0,maxWidth:"md",disableBackdropClick:!0,disableEscapeKeyDown:!0},i.default.createElement(r.DialogContent,null,i.default.createElement(r.CircularProgress,{style:{marginLeft:"50%"}}),i.default.createElement(r.DialogContentText,{style:{marginTop:20}},i.default.createElement(r.Typography,null," Tolong Menunggu ")))),function(e,t){var[a,n]=i.default.useState(""),[l,u]=i.default.useState(""),[s,d]=i.default.useState(0),[c,f]=i.default.useState(0),[m,p]=i.default.useState("0.0");return i.default.createElement(r.Dialog,{fullScreen:!1,open:e,onClose:t,"aria-labelledby":"responsive-dialog-title"},i.default.createElement(r.DialogTitle,{id:"responsive-dialog-title"},"Use Google's location service?"),i.default.createElement(r.DialogContent,null,i.default.createElement(r.DialogContentText,null,i.default.createElement(r.TextField,{label:"Nama",placeholder:"Nama",value:a,onChange:e=>n(e.target.value),fullWidth:!0}),i.default.createElement(r.TextField,{value:l,label:"Alamat",placeholder:"Alamat",onChange:e=>u(e.target.value),fullWidth:!0}),i.default.createElement(r.TextField,{value:m,label:"Radius",placeholder:"Radius",onChange:e=>p(e.target.value),fullWidth:!0}),i.default.createElement(r.TextField,{placeholder:"Koordinat",fullWidth:!0,disabled:!0,value:s+" , "+c,InputProps:{endAdornment:i.default.createElement(r.InputAdornment,{position:"end"},i.default.createElement(r.Button,{onClick:e=>{return t=e=>{f(e.coords.longitude),d(e.coords.latitude)},void(window.navigator&&window.navigator.geolocation&&window.navigator.geolocation.getCurrentPosition(e=>{t(e)},e=>{switch(e.code){case 1:console.log("Permission Denied");break;case 2:console.log("Position Unavailable");break;case 3:console.log("Timeout")}}));var t}},"Get Lokasi"))}}))),i.default.createElement(r.DialogActions,null,i.default.createElement(r.Button,{autoFocus:!0,color:"primary"},"Cancel"),i.default.createElement(r.Button,{color:"primary",autoFocus:!0,onClick:e=>{o.addLokasi({addres:l,latitude:s,longitude:c,created_at:"",id:0,name:a,radius:m,updated_at:""}).then(e=>{window.location.reload()})}},"Send")))}(e,()=>t(!1)),i.default.createElement(u.default,{options:{search:!1,emptyRowsWhenPaging:!1,pageSizeOptions:[]},actions:[{icon:"add",tooltip:"Add User",isFreeAction:!0,onClick:e=>t(!0)}],title:"Lokasi",columns:[{title:"Name",field:"name"},{title:"Alamat",field:"addres"},{title:"latitude",field:"latitude"},{title:"longitude",field:"longitude"}],data:a.data}))}},T3cl:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.GET_LOCATIONLIST_REFRESH="GET_LOCATIONLIST_REFRESH",t.GET_LOCATIONLIST_SUCCES="GET_LOCATIONLIST_SUCCES",t.GET_LOCATIONLIST_FAILED="GET_LOCATIONLIST_FAILED",t.GET_LOCATIONLIST_LOADNG="GET_LOCATIONLIST_LOADNG"},U28T:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=a("T3cl"),l={data:[],isEror:!1,isLoading:!1,isFound:!1};t.cabangReducer=function(e=l,t){switch(console.log(t.type),t.type){case n.GET_LOCATIONLIST_REFRESH:return Object.assign(Object.assign({},e),{isLoading:!0,isEror:!1,isFound:!0});case n.GET_LOCATIONLIST_SUCCES:return Object.assign(Object.assign({},e),{data:t.payload,isLoading:!1,isFound:!0});case n.GET_LOCATIONLIST_FAILED:return Object.assign(Object.assign({},e),{isEror:!0,isLoading:!1,isFound:!0});case n.GET_LOCATIONLIST_LOADNG:return Object.assign(Object.assign({},e),{isLoading:!0,isEror:!1,isFound:!0})}return e}},UIHd:function(e,t,a){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},l=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var a in e)Object.hasOwnProperty.call(e,a)&&(t[a]=e[a]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0});const i=n(a("iuhU")),r=a("55Ip"),o=a("TTf+"),u=n(a("q1tI")),s=a("cR8U"),d=a("/MKj"),c=o.makeStyles(e=>o.createStyles({root:{display:"flex"},appBar:{zIndex:e.zIndex.drawer+1},drawer:{width:240,flexShrink:0},hide:{display:"none"},drawerHeader:Object.assign(Object.assign({display:"flex",alignItems:"center",padding:e.spacing(0,1)},e.mixins.toolbar),{justifyContent:"flex-end"}),drawerPaper:{width:240},content:{flexGrow:1,padding:e.spacing(3),transition:e.transitions.create("margin",{easing:e.transitions.easing.sharp,duration:e.transitions.duration.leavingScreen}),marginLeft:-240,overscrollBehaviorY:"auto"},contentShift:{flexGrow:1,padding:e.spacing(3),transition:e.transitions.create("margin",{easing:e.transitions.easing.easeOut,duration:e.transitions.duration.enteringScreen}),marginLeft:0,overscrollBehaviorY:"auto"},toolbar:e.mixins.toolbar}));t.default=function(){var e=d.useSelector(e=>e.ui);const t=c();return u.default.createElement("div",{style:{position:"relative"},className:t.root},u.default.createElement(o.CssBaseline,null),s.NavBar(),u.default.createElement("main",{className:i.default({[t.content]:!e.isDrawerOpen,[t.contentShift]:e.isDrawerOpen})},u.default.createElement("div",{className:t.drawerHeader}),u.default.createElement(r.Route,{path:"/dashboard/lokasi",component:u.default.lazy(()=>Promise.resolve().then(()=>l(a("R6f2"))))}),u.default.createElement(r.Route,{path:"/dashboard",component:u.default.lazy(()=>Promise.resolve().then(()=>l(a("Vo1g")))),exact:!0}),u.default.createElement(r.Route,{path:"/dashboard/userlist",component:u.default.lazy(()=>Promise.resolve().then(()=>l(a("lHDH"))))}),u.default.createElement(r.Route,{path:"/dashboard/mobileUser",component:u.default.lazy(()=>Promise.resolve().then(()=>l(a("VN2u"))))})))}},VN2u:function(e,t,a){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const l=n(a("q1tI"));t.default=function(){return l.default.createElement("div",null," ini tets")}},Vo1g:function(e,t,a){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var a in e)Object.hasOwnProperty.call(e,a)&&(t[a]=e[a]);return t.default=e,t},l=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const i=n(a("q1tI")),r=l(a("27Dn")),o=a("VR7H"),u=a("6dGr"),s=a("TTf+"),d=l(a("frSy")),c=l(a("jlMd")),f=l(a("uSci"));t.default=function(){var[e,t]=i.useState([]),[a,n]=i.useState(!1);const{data:l,error:m,isLoading:p}=o.useAsync({promiseFn:u.getAllAbsensi});return p?i.default.createElement(s.CircularProgress,{style:{marginTop:"20%",marginLeft:"50%"}}):m?i.default.createElement("div",null," ini err "):(l&&(e=l),i.default.createElement("div",null,(g=a,i.default.createElement(s.Dialog,{fullScreen:!1,open:g,"aria-labelledby":"responsive-dialog-title"},i.default.createElement(d.default,{id:"responsive-dialog-title"},"Use Google's location service?"),i.default.createElement(c.default,null,i.default.createElement(f.default,null,"Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.")),i.default.createElement(s.DialogActions,null,i.default.createElement(s.Button,{autoFocus:!0,color:"primary"},"Disagree"),i.default.createElement(s.Button,{color:"primary",autoFocus:!0},"Agree")))),i.default.createElement(r.default,{options:{search:!1,emptyRowsWhenPaging:!1,pageSize:5,pageSizeOptions:[]},columns:[{title:"Name",field:"name"},{title:"tanggal",field:"created_at"},{title:"cabang",field:"cabang"}],data:e})));var g}},Vppv:function(e,t,a){"use strict";var n=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var a in e)Object.hasOwnProperty.call(e,a)&&(t[a]=e[a]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0});const l=n(a("q1tI")),i=a("55Ip"),r=a("/MKj");function o(){return l.default.createElement(i.BrowserRouter,null,l.default.createElement(l.Suspense,{fallback:l.default.createElement("div",null,"Loading...")},l.default.createElement(i.Route,{path:"/login",component:l.default.lazy(()=>Promise.resolve().then(()=>n(a("Ctfv"))))}),l.default.createElement(i.Route,{path:"/dashboard",component:l.default.lazy(()=>Promise.resolve().then(()=>n(a("UIHd"))))}),l.default.createElement(i.Route,{exact:!0,path:"/"})))}t.default=function(e){return l.default.createElement(r.Provider,{store:e.store},l.default.createElement(o,null))}},bUC5:function(e,t,a){a("zNTY")},cR8U:function(e,t,a){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const l=n(a("q1tI")),i=a("TTf+"),r=a("55Ip"),o=a("/MKj"),u=a("m0SF"),s=i.makeStyles(e=>i.createStyles({root:{display:"flex"},appBar:{zIndex:e.zIndex.drawer+1},drawer:{width:240,flexShrink:0},hide:{display:"none"},drawerHeader:Object.assign(Object.assign({display:"flex",alignItems:"center",padding:e.spacing(0,1)},e.mixins.toolbar),{justifyContent:"flex-end"}),drawerPaper:{width:240},content:{flexGrow:1,padding:e.spacing(3),transition:e.transitions.create("margin",{easing:e.transitions.easing.sharp,duration:e.transitions.duration.leavingScreen}),marginLeft:-240,overscrollBehaviorY:"auto"},contentShift:{flexGrow:1,padding:e.spacing(3),transition:e.transitions.create("margin",{easing:e.transitions.easing.easeOut,duration:e.transitions.duration.enteringScreen}),marginLeft:0,overscrollBehaviorY:"auto"},toolbar:e.mixins.toolbar}));t.NavBar=function(){var e=o.useSelector(e=>e.ui),t=o.useDispatch();const a=s();return l.default.createElement("div",null,l.default.createElement(i.AppBar,{position:"fixed",className:a.appBar},l.default.createElement(i.Toolbar,null,l.default.createElement(i.IconButton,{about:"Menu",onClick:()=>t(u.setDrawer(!e.isDrawerOpen)),edge:"start",color:"inherit","aria-label":"menu"},l.default.createElement("div",{className:"material-icons"},"menu")),l.default.createElement(i.Typography,{variant:"h6",noWrap:!0},"Sistem Kehadiran"))),l.default.createElement(i.Drawer,{variant:"persistent",open:e.isDrawerOpen,className:a.drawer,classes:{paper:a.drawerPaper}},l.default.createElement("div",{className:a.toolbar}),l.default.createElement(i.List,null,l.default.createElement(r.NavLink,{to:"/dashboard",className:"nav-link",style:{textDecoration:"none"}},l.default.createElement(i.ListItem,{button:!0},l.default.createElement(i.ListItemIcon,null,l.default.createElement("div",{className:"material-icons"},"today")),l.default.createElement(i.ListItemText,{primary:"Kehadiran"}))),l.default.createElement(r.NavLink,{className:"nav-link",to:"/dashboard/lokasi",style:{textDecoration:"none"}},l.default.createElement(i.ListItem,{button:!0},l.default.createElement(i.ListItemIcon,null,l.default.createElement("div",{className:"material-icons"},"pin_drop")),l.default.createElement(i.ListItemText,{primary:"Lokasi"}))),l.default.createElement(r.NavLink,{className:"nav-link",to:"/dashboard/userList",style:{textDecoration:"none"}},l.default.createElement(i.ListItem,{button:!0},l.default.createElement(i.ListItemIcon,null,l.default.createElement("div",{className:"material-icons"},"person")),l.default.createElement(i.ListItemText,{primary:"UserList"}))),l.default.createElement(r.NavLink,{className:"nav-link",to:"/dashboard/mobileUser",style:{textDecoration:"none"}},l.default.createElement(i.ListItem,{button:!0},l.default.createElement(i.ListItemIcon,null,l.default.createElement("div",{className:"material-icons"},"mobile_screen_share")),l.default.createElement(i.ListItemText,{primary:"Mobile User"}))))))}},lHDH:function(e,t,a){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const l=n(a("q1tI")),i=n(a("27Dn")),r=a("6dGr"),o=a("VR7H"),u=a("TTf+");t.default=function(){var e;const{data:t,error:a,isLoading:n}=o.useAsync({promiseFn:r.getAllUser});return n?l.default.createElement(u.CircularProgress,{style:{marginTop:"20%",marginLeft:"50%"}}):l.default.createElement(i.default,{options:{search:!1,emptyRowsWhenPaging:!1,pageSizeOptions:[]},title:"User List",columns:[{title:"Name",field:"name"},{title:"email",field:"email"},{title:"id",field:"nidn"},{title:"alamat",field:"alamat"},{title:"status",field:"status"}],data:null===(e=t)||void 0===e?void 0:e.data})}},m0SF:function(e,t,a){"use strict";var n=this&&this.__awaiter||function(e,t,a,n){return new(a||(a=Promise))((function(l,i){function r(e){try{u(n.next(e))}catch(e){i(e)}}function o(e){try{u(n.throw(e))}catch(e){i(e)}}function u(e){var t;e.done?l(e.value):(t=e.value,t instanceof a?t:new a((function(e){e(t)}))).then(r,o)}u((n=n.apply(e,t||[])).next())}))};Object.defineProperty(t,"__esModule",{value:!0});const l=a("nMDu");t.setDrawer=function(e){return t=>n(this,void 0,void 0,(function*(){t(e?{type:l.OPEN_DRAWER}:{type:l.CLOSE_DRAWER})}))}},nMDu:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.OPEN_DRAWER="OPEN_DRAWER",t.CLOSE_DRAWER="CLOSE_DRAWER"},u2td:function(e,t,a){"use strict";var n=this&&this.__awaiter||function(e,t,a,n){return new(a||(a=Promise))((function(l,i){function r(e){try{u(n.next(e))}catch(e){i(e)}}function o(e){try{u(n.throw(e))}catch(e){i(e)}}function u(e){var t;e.done?l(e.value):(t=e.value,t instanceof a?t:new a((function(e){e(t)}))).then(r,o)}u((n=n.apply(e,t||[])).next())}))};Object.defineProperty(t,"__esModule",{value:!0});const l=a("4Lxk"),i=a("6dGr");t.userLogin=e=>t=>n(void 0,void 0,void 0,(function*(){try{t({type:l.LOGIN_LOADING,payload:null});var a={payload:(yield i.loginRequestOnly(e)).data,type:l.LOGIN_SUCCES};t(a)}catch(e){var n={payload:null,type:l.LOGIN_FAILED};t(n)}}))},xt7p:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=a("nMDu"),l={isDrawerOpen:!1};t.UIReducer=function(e=l,t){switch(t.type){case n.OPEN_DRAWER:return Object.assign(Object.assign({},e),{isDrawerOpen:!0});case n.CLOSE_DRAWER:return Object.assign(Object.assign({},e),{isDrawerOpen:!1});default:return e}}},zNTY:function(e,t,a){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},l=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var a in e)Object.hasOwnProperty.call(e,a)&&(t[a]=e[a]);return t.default=e,t};Object.defineProperty(t,"__esModule",{value:!0});const i=n(a("i8i4")),r=n(a("q1tI")),o=a("ANjH"),u=a("JcH6"),s=a("5HXA"),d=n(a("sINF"));var c=o.createStore(u.rootReducer,s.composeWithDevTools(o.applyMiddleware(d.default)));if(document.getElementById("example")){const e=r.default.lazy(()=>Promise.resolve().then(()=>l(a("Vppv"))));i.default.render(r.default.createElement(r.default.Suspense,{fallback:r.default.createElement("div",null)},r.default.createElement(e,{store:c})),document.getElementById("example"))}}},[[0,1,2]]]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/js/app"],{
+
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes React and other helpers. It's a great starting point while
+ * building robust, powerful web applications using React + Laravel.
+ */
+// require('./bootstrap');
+
+/**
+ * Next, we will create a fresh React component instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+__webpack_require__(/*! ./page/index */ "./resources/js/page/index.tsx");
+
+/***/ }),
+
+/***/ "./resources/js/components/AbsensiDataTableComponent.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/AbsensiDataTableComponent.tsx ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const material_table_1 = __importDefault(__webpack_require__(/*! material-table */ "./node_modules/material-table/dist/index.js"));
+const react_async_1 = __webpack_require__(/*! react-async */ "./node_modules/react-async/dist-web/index.js");
+const client_1 = __webpack_require__(/*! ../util/client */ "./resources/js/util/client.ts");
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const DialogTitle_1 = __importDefault(__webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js"));
+const DialogContent_1 = __importDefault(__webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js"));
+const DialogContentText_1 = __importDefault(__webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js"));
+function AbsensiDataTableComponent() {
+    var [dataAbsensi, setDataAbsensi] = react_1.useState([]);
+    var [dialogShown, setDialogShow] = react_1.useState(false);
+    const { data, error, isLoading } = react_async_1.useAsync({ promiseFn: client_1.getAllAbsensi });
+    if (isLoading) {
+        return (react_1.default.createElement(core_1.CircularProgress, { style: { marginTop: "20%", marginLeft: "50%" } }));
+    }
+    if (error) {
+        return (react_1.default.createElement("div", null, " ini err "));
+    }
+    if (data) {
+        dataAbsensi = data;
+    }
+    return react_1.default.createElement("div", null,
+        DialogEdit(dialogShown),
+        react_1.default.createElement(material_table_1.default, { options: {
+                search: false,
+                emptyRowsWhenPaging: false,
+                pageSize: 5,
+                pageSizeOptions: []
+            }, columns: [
+                { title: 'Name', field: 'name' },
+                { title: 'tanggal', field: 'created_at' },
+                { title: 'cabang', field: 'cabang' }
+            ], data: dataAbsensi }));
+}
+exports.default = AbsensiDataTableComponent;
+function DialogEdit(show) {
+    return react_1.default.createElement(core_1.Dialog, { fullScreen: false, open: show, "aria-labelledby": "responsive-dialog-title" },
+        react_1.default.createElement(DialogTitle_1.default, { id: "responsive-dialog-title" }, "Use Google's location service?"),
+        react_1.default.createElement(DialogContent_1.default, null,
+            react_1.default.createElement(DialogContentText_1.default, null, "Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.")),
+        react_1.default.createElement(core_1.DialogActions, null,
+            react_1.default.createElement(core_1.Button, { autoFocus: true, color: "primary" }, "Disagree"),
+            react_1.default.createElement(core_1.Button, { color: "primary", autoFocus: true }, "Agree")));
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AddLocationTable.tsx":
+/*!******************************************************!*\
+  !*** ./resources/js/components/AddLocationTable.tsx ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const client_1 = __webpack_require__(/*! ../util/client */ "./resources/js/util/client.ts");
+const material_table_1 = __importDefault(__webpack_require__(/*! material-table */ "./node_modules/material-table/dist/index.js"));
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const CabangListAction_1 = __webpack_require__(/*! ../redux/action/LocationListAction/CabangListAction */ "./resources/js/redux/action/LocationListAction/CabangListAction.ts");
+function LocationTable() {
+    // const { data, error, isLoading } = useAsync({ promiseFn: getAllLokasi });
+    var [isEdit, setEdit] = react_1.useState(false);
+    var cabangState = (state) => state.cabang;
+    var cabang = react_redux_1.useSelector(cabangState);
+    var dispatch = react_redux_1.useDispatch();
+    react_1.useEffect(() => {
+        if (!cabang.isFound) {
+            dispatch(CabangListAction_1.GetAllCabangAction());
+        }
+    });
+    return (react_1.default.createElement("div", null,
+        cabang.isLoading && (react_1.default.createElement(core_1.Dialog, { open: true, maxWidth: "md", disableBackdropClick: true, disableEscapeKeyDown: true },
+            react_1.default.createElement(core_1.DialogContent, null,
+                react_1.default.createElement(core_1.CircularProgress, { style: { marginLeft: "50%" } }),
+                react_1.default.createElement(core_1.DialogContentText, { style: { marginTop: 20 } },
+                    react_1.default.createElement(core_1.Typography, null, " Tolong Menunggu "))))),
+        DialogEdit(isEdit, () => setEdit(false)),
+        react_1.default.createElement(material_table_1.default, { options: {
+                search: false,
+                emptyRowsWhenPaging: false,
+                pageSizeOptions: []
+            }, actions: [
+                {
+                    icon: "add",
+                    tooltip: "Add User",
+                    isFreeAction: true,
+                    onClick: event => setEdit(true)
+                }
+            ], title: "Lokasi", columns: [
+                { title: "Name", field: "name" },
+                { title: "Alamat", field: "addres" },
+                { title: "latitude", field: "latitude" },
+                { title: "longitude", field: "longitude" }
+            ], data: cabang.data })));
+}
+exports.default = LocationTable;
+function getLocation(succesCallback) {
+    if (window.navigator && window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(position => {
+            succesCallback(position);
+        }, error => {
+            switch (error.code) {
+                case 1:
+                    console.log("Permission Denied");
+                    break;
+                case 2:
+                    console.log("Position Unavailable");
+                    break;
+                case 3:
+                    console.log("Timeout");
+                    break;
+            }
+        });
+    }
+}
+function DialogEdit(show, onClose) {
+    var [nama, setName] = react_1.default.useState("");
+    var [alamat, setAlamat] = react_1.default.useState("");
+    var [latitude, setLatitude] = react_1.default.useState(0.0);
+    var [longitude, setLongitude] = react_1.default.useState(0.0);
+    var [radius, setRadius] = react_1.default.useState("0.0");
+    return (react_1.default.createElement(core_1.Dialog, { fullScreen: false, open: show, onClose: onClose, "aria-labelledby": "responsive-dialog-title" },
+        react_1.default.createElement(core_1.DialogTitle, { id: "responsive-dialog-title" }, "Use Google's location service?"),
+        react_1.default.createElement(core_1.DialogContent, null,
+            react_1.default.createElement(core_1.DialogContentText, null,
+                react_1.default.createElement(core_1.TextField, { label: "Nama", placeholder: "Nama", value: nama, onChange: event => setName(event.target.value), fullWidth: true }),
+                react_1.default.createElement(core_1.TextField, { value: alamat, label: "Alamat", placeholder: "Alamat", onChange: event => setAlamat(event.target.value), fullWidth: true }),
+                react_1.default.createElement(core_1.TextField, { value: radius, label: "Radius", placeholder: "Radius", onChange: event => setRadius(event.target.value), fullWidth: true }),
+                react_1.default.createElement(core_1.TextField, { placeholder: "Koordinat", fullWidth: true, disabled: true, value: latitude + " , " + longitude, InputProps: {
+                        endAdornment: (react_1.default.createElement(core_1.InputAdornment, { position: "end" },
+                            react_1.default.createElement(core_1.Button, { onClick: event => getLocation(position => {
+                                    setLongitude(position.coords.longitude);
+                                    setLatitude(position.coords.latitude);
+                                }) }, "Get Lokasi")))
+                    } }))),
+        react_1.default.createElement(core_1.DialogActions, null,
+            react_1.default.createElement(core_1.Button, { autoFocus: true, color: "primary" }, "Cancel"),
+            react_1.default.createElement(core_1.Button, { color: "primary", autoFocus: true, onClick: event => {
+                    client_1.addLokasi({
+                        addres: alamat,
+                        latitude: latitude,
+                        longitude: longitude,
+                        created_at: "",
+                        id: 0,
+                        name: nama,
+                        radius: radius,
+                        updated_at: ""
+                    }).then(hasil => {
+                        window.location.reload();
+                    });
+                } }, "Send"))));
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/components/JabatanTableList.tsx":
+/*!******************************************************!*\
+  !*** ./resources/js/components/JabatanTableList.tsx ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+function JabatanDataTable() {
+    return react_1.default.createElement("div", null, " ini tets");
+}
+exports.default = JabatanDataTable;
+
+
+/***/ }),
+
+/***/ "./resources/js/components/LoginCard.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/components/LoginCard.tsx ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const esm_1 = __webpack_require__(/*! @material-ui/core/esm */ "./node_modules/@material-ui/core/esm/index.js");
+const client_1 = __webpack_require__(/*! ../util/client */ "./resources/js/util/client.ts");
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const UserAction_1 = __webpack_require__(/*! ../redux/action/UserAction/UserAction */ "./resources/js/redux/action/UserAction/UserAction.ts");
+function LoginCard() {
+    const [email, setEmail] = react_1.default.useState("");
+    const [password, setPassword] = react_1.default.useState("");
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+    const isUserLogin = (state) => state.user.isLoading;
+    const isLogin = react_redux_1.useSelector(isUserLogin);
+    const dispatch = react_redux_1.useDispatch();
+    console.log(isLogin);
+    return (react_1.default.createElement(esm_1.Container, { maxWidth: "xs", style: { transform: "translate(0%,15%)" } },
+        react_1.default.createElement(esm_1.Card, { elevation: 10 },
+            react_1.default.createElement(esm_1.CardContent, null,
+                react_1.default.createElement(esm_1.TextField, { fullWidth: true, placeholder: "Email@mail.com", label: "Email", onChange: handleEmailChange })),
+            react_1.default.createElement(esm_1.CardContent, null,
+                react_1.default.createElement(esm_1.TextField, { fullWidth: true, placeholder: "*****", label: "Password", type: "password", onChange: handlePasswordChange })),
+            react_1.default.createElement(esm_1.CardContent, null,
+                react_1.default.createElement(esm_1.Button, { disabled: isLogin, fullWidth: true, color: "primary", onClick: () => {
+                        dispatch(UserAction_1.userLogin({
+                            email: email,
+                            password: password
+                        }));
+                        client_1.Login({
+                            email: email,
+                            password: password
+                        }, {
+                            OnEror: eror => alert(eror),
+                            OnSucces: result => console.log(result)
+                        });
+                    }, variant: "outlined" }, "Login")))));
+}
+exports.default = LoginCard;
+
+
+/***/ }),
+
+/***/ "./resources/js/components/NavBar.tsx":
+/*!********************************************!*\
+  !*** ./resources/js/components/NavBar.tsx ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const UIActionLIst_1 = __webpack_require__(/*! ../redux/action/UIAction/UIActionLIst */ "./resources/js/redux/action/UIAction/UIActionLIst.ts");
+const drawerWidth = 240;
+const useStyle = core_1.makeStyles((theme) => core_1.createStyles({
+    root: {
+        display: "flex"
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0
+    },
+    hide: {
+        display: "none"
+    },
+    drawerHeader: Object.assign(Object.assign({ display: "flex", alignItems: "center", padding: theme.spacing(0, 1) }, theme.mixins.toolbar), { justifyContent: "flex-end" }),
+    drawerPaper: {
+        width: drawerWidth
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen
+        }),
+        marginLeft: -drawerWidth,
+        overscrollBehaviorY: "auto"
+    },
+    contentShift: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen
+        }),
+        marginLeft: 0,
+        overscrollBehaviorY: "auto"
+    },
+    toolbar: theme.mixins.toolbar
+}));
+function NavBar() {
+    // var [openDrawer, setOpenDrawer] = React.useState(false);
+    var cabangState = (state) => state.ui;
+    var uiState = react_redux_1.useSelector(cabangState);
+    var dispatch = react_redux_1.useDispatch();
+    var handleMenuButton = () => dispatch(UIActionLIst_1.setDrawer(!uiState.isDrawerOpen));
+    const classes = useStyle();
+    return react_1.default.createElement("div", null,
+        react_1.default.createElement(core_1.AppBar, { position: "fixed", className: classes.appBar },
+            react_1.default.createElement(core_1.Toolbar, null,
+                react_1.default.createElement(core_1.IconButton, { about: "Menu", onClick: handleMenuButton, edge: "start", color: "inherit", "aria-label": "menu" },
+                    react_1.default.createElement("div", { className: "material-icons" }, "menu")),
+                react_1.default.createElement(core_1.Typography, { variant: "h6", noWrap: true }, "Sistem Kehadiran"))),
+        react_1.default.createElement(core_1.Drawer, { variant: "persistent", open: uiState.isDrawerOpen, className: classes.drawer, classes: {
+                paper: classes.drawerPaper
+            } },
+            react_1.default.createElement("div", { className: classes.toolbar }),
+            react_1.default.createElement(core_1.List, null,
+                react_1.default.createElement(react_router_dom_1.NavLink, { to: "/dashboard", className: "nav-link", style: { textDecoration: "none" } },
+                    react_1.default.createElement(core_1.ListItem, { button: true },
+                        react_1.default.createElement(core_1.ListItemIcon, null,
+                            react_1.default.createElement("div", { className: "material-icons" }, "today")),
+                        react_1.default.createElement(core_1.ListItemText, { primary: "Kehadiran" }))),
+                react_1.default.createElement(react_router_dom_1.NavLink, { className: "nav-link", to: "/dashboard/lokasi", style: { textDecoration: "none" } },
+                    react_1.default.createElement(core_1.ListItem, { button: true },
+                        react_1.default.createElement(core_1.ListItemIcon, null,
+                            react_1.default.createElement("div", { className: "material-icons" }, "pin_drop")),
+                        react_1.default.createElement(core_1.ListItemText, { primary: "Lokasi" }))),
+                react_1.default.createElement(react_router_dom_1.NavLink, { className: "nav-link", to: "/dashboard/userList", style: { textDecoration: "none" } },
+                    react_1.default.createElement(core_1.ListItem, { button: true },
+                        react_1.default.createElement(core_1.ListItemIcon, null,
+                            react_1.default.createElement("div", { className: "material-icons" }, "person")),
+                        react_1.default.createElement(core_1.ListItemText, { primary: "UserList" }))),
+                react_1.default.createElement(react_router_dom_1.NavLink, { className: "nav-link", to: "/dashboard/mobileUser", style: { textDecoration: "none" } },
+                    react_1.default.createElement(core_1.ListItem, { button: true },
+                        react_1.default.createElement(core_1.ListItemIcon, null,
+                            react_1.default.createElement("div", { className: "material-icons" }, "mobile_screen_share")),
+                        react_1.default.createElement(core_1.ListItemText, { primary: "Mobile User" }))))));
+}
+exports.NavBar = NavBar;
+
+
+/***/ }),
+
+/***/ "./resources/js/components/UserListDataTableComponent.tsx":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/UserListDataTableComponent.tsx ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const material_table_1 = __importDefault(__webpack_require__(/*! material-table */ "./node_modules/material-table/dist/index.js"));
+const client_1 = __webpack_require__(/*! ../util/client */ "./resources/js/util/client.ts");
+const react_async_1 = __webpack_require__(/*! react-async */ "./node_modules/react-async/dist-web/index.js");
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+function UserListDataTableComponent() {
+    var _a;
+    const { data, error, isLoading } = react_async_1.useAsync({ promiseFn: client_1.getAllUser });
+    if (isLoading) {
+        return react_1.default.createElement(core_1.CircularProgress, { style: { marginTop: "20%", marginLeft: "50%" } });
+    }
+    return (react_1.default.createElement(material_table_1.default, { options: {
+            search: false,
+            emptyRowsWhenPaging: false,
+            pageSizeOptions: []
+        }, title: "User List", columns: [
+            { title: "Name", field: "name" },
+            { title: "email", field: "email" },
+            { title: "id", field: "nidn" },
+            { title: "alamat", field: "alamat" },
+            { title: "status", field: "status" }
+        ], data: (_a = data) === null || _a === void 0 ? void 0 : _a.data }));
+}
+exports.default = UserListDataTableComponent;
+
+
+/***/ }),
+
+/***/ "./resources/js/page/Dashboard.tsx":
+/*!*****************************************!*\
+  !*** ./resources/js/page/Dashboard.tsx ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const clsx_1 = __importDefault(__webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js"));
+const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const NavBar_1 = __webpack_require__(/*! ../components/NavBar */ "./resources/js/components/NavBar.tsx");
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const drawerWidth = 240;
+const useStyle = core_1.makeStyles((theme) => core_1.createStyles({
+    root: {
+        display: "flex"
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0
+    },
+    hide: {
+        display: "none"
+    },
+    drawerHeader: Object.assign(Object.assign({ display: "flex", alignItems: "center", padding: theme.spacing(0, 1) }, theme.mixins.toolbar), { justifyContent: "flex-end" }),
+    drawerPaper: {
+        width: drawerWidth
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen
+        }),
+        marginLeft: -drawerWidth,
+        overscrollBehaviorY: "auto"
+    },
+    contentShift: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen
+        }),
+        marginLeft: 0,
+        overscrollBehaviorY: "auto"
+    },
+    toolbar: theme.mixins.toolbar
+}));
+function Dashboard() {
+    var cabangState = (state) => state.ui;
+    var uiState = react_redux_1.useSelector(cabangState);
+    const classes = useStyle();
+    return (react_1.default.createElement("div", { style: { position: "relative" }, className: classes.root },
+        react_1.default.createElement(core_1.CssBaseline, null),
+        NavBar_1.NavBar(),
+        react_1.default.createElement("main", { className: clsx_1.default({
+                [classes.content]: !uiState.isDrawerOpen,
+                [classes.contentShift]: uiState.isDrawerOpen
+            }) },
+            react_1.default.createElement("div", { className: classes.drawerHeader }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/lokasi", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackPrefetch: true */ /*! ../components/AddLocationTable */ "./resources/js/components/AddLocationTable.tsx")))) }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackPrefetch: true */ /*! ../components/AbsensiDataTableComponent */ "./resources/js/components/AbsensiDataTableComponent.tsx")))), exact: true }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/userlist", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackPrefetch: true */ /*! ../components/UserListDataTableComponent */ "./resources/js/components/UserListDataTableComponent.tsx")))) }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/mobileUser", component: /* webpackPrefetch: true */ react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/*! ../components/JabatanTableList */ "./resources/js/components/JabatanTableList.tsx")))) }))));
+}
+exports.default = Dashboard;
+
+
+/***/ }),
+
+/***/ "./resources/js/page/IndexPage.tsx":
+/*!*****************************************!*\
+  !*** ./resources/js/page/IndexPage.tsx ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function App(props) {
+    return (react_1.default.createElement(react_redux_1.Provider, { store: props.store },
+        react_1.default.createElement(RouterComponent, null)));
+}
+exports.default = App;
+function RouterComponent() {
+    return (react_1.default.createElement(react_router_dom_1.BrowserRouter, null,
+        react_1.default.createElement(react_1.Suspense, { fallback: react_1.default.createElement("div", null, "Loading...") },
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/login", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/*! ./LoginPage */ "./resources/js/page/LoginPage.tsx")))) }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackChunkName: "dashboard" */ /*! ./Dashboard */ "./resources/js/page/Dashboard.tsx")))) }),
+            react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: "/" }))));
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/page/LoginPage.tsx":
+/*!*****************************************!*\
+  !*** ./resources/js/page/LoginPage.tsx ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const LoginCard_1 = __importDefault(__webpack_require__(/*! ../components/LoginCard */ "./resources/js/components/LoginCard.tsx"));
+class LoginPage extends react_1.Component {
+    render() {
+        return (react_1.default.createElement(core_1.Container, { maxWidth: "xl", style: {
+                height: "100%",
+                width: "100%",
+                margin: 0,
+                backgroundColor: "#32415a",
+                display: "flex"
+            } },
+            react_1.default.createElement(LoginCard_1.default, null)));
+    }
+}
+exports.default = LoginPage;
+
+
+/***/ }),
+
+/***/ "./resources/js/page/index.tsx":
+/*!*************************************!*\
+  !*** ./resources/js/page/index.tsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const redux_1 = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+const store_1 = __webpack_require__(/*! ../redux/store */ "./resources/js/redux/store/index.ts");
+// import { App } from "./IndexPage";
+const redux_devtools_extension_1 = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
+const redux_thunk_1 = __importDefault(__webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js"));
+var data = redux_1.createStore(store_1.rootReducer, redux_devtools_extension_1.composeWithDevTools(redux_1.applyMiddleware(redux_thunk_1.default)));
+if (document.getElementById("example")) {
+    const OtherComponent = react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackChunkName: "dynamically-imported-component" */ /*! ../page/IndexPage */ "./resources/js/page/IndexPage.tsx"))));
+    react_dom_1.default.render(react_1.default.createElement(react_1.default.Suspense, { fallback: react_1.default.createElement("div", null) },
+        react_1.default.createElement(OtherComponent, { store: data })), document.getElementById("example"));
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/LocationListAction/CabangListAction.ts":
+/*!**************************************************************************!*\
+  !*** ./resources/js/redux/action/LocationListAction/CabangListAction.ts ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const client_1 = __webpack_require__(/*! ../../../util/client */ "./resources/js/util/client.ts");
+const CabangListActionType_1 = __webpack_require__(/*! ../LocationListAction/CabangListActionType */ "./resources/js/redux/action/LocationListAction/CabangListActionType.ts");
+function GetAllCabangAction() {
+    return (dispatch) => __awaiter(this, void 0, void 0, function* () {
+        try {
+            dispatch({
+                type: CabangListActionType_1.GET_LOCATIONLIST_LOADNG
+            });
+            var data = yield client_1.getAllLokasi();
+            console.log(data);
+            var hasil = {
+                payload: data,
+                type: CabangListActionType_1.GET_LOCATIONLIST_SUCCES
+            };
+            dispatch(hasil);
+        }
+        catch (error) {
+            dispatch({ type: CabangListActionType_1.GET_LOCATIONLIST_FAILED });
+            console.log("eror gan");
+        }
+    });
+}
+exports.GetAllCabangAction = GetAllCabangAction;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/LocationListAction/CabangListActionType.ts":
+/*!******************************************************************************!*\
+  !*** ./resources/js/redux/action/LocationListAction/CabangListActionType.ts ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GET_LOCATIONLIST_REFRESH = "GET_LOCATIONLIST_REFRESH";
+exports.GET_LOCATIONLIST_SUCCES = "GET_LOCATIONLIST_SUCCES";
+exports.GET_LOCATIONLIST_FAILED = "GET_LOCATIONLIST_FAILED";
+exports.GET_LOCATIONLIST_LOADNG = "GET_LOCATIONLIST_LOADNG";
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/UIAction/UIActionLIst.ts":
+/*!************************************************************!*\
+  !*** ./resources/js/redux/action/UIAction/UIActionLIst.ts ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const UIActionType_1 = __webpack_require__(/*! ./UIActionType */ "./resources/js/redux/action/UIAction/UIActionType.ts");
+function setDrawer(isOpen) {
+    return (dispatch) => __awaiter(this, void 0, void 0, function* () {
+        if (isOpen) {
+            dispatch({
+                type: UIActionType_1.OPEN_DRAWER,
+            });
+        }
+        else {
+            dispatch({
+                type: UIActionType_1.CLOSE_DRAWER,
+            });
+        }
+    });
+}
+exports.setDrawer = setDrawer;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/UIAction/UIActionType.ts":
+/*!************************************************************!*\
+  !*** ./resources/js/redux/action/UIAction/UIActionType.ts ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OPEN_DRAWER = "OPEN_DRAWER";
+exports.CLOSE_DRAWER = "CLOSE_DRAWER";
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/UserAction/UserAction.ts":
+/*!************************************************************!*\
+  !*** ./resources/js/redux/action/UserAction/UserAction.ts ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const UserActionType_1 = __webpack_require__(/*! ../UserAction/UserActionType */ "./resources/js/redux/action/UserAction/UserActionType.ts");
+const client_1 = __webpack_require__(/*! ../../../util/client */ "./resources/js/util/client.ts");
+exports.userLogin = (user) => {
+    return (dispatch) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            dispatch(UserAwait());
+            const asyncResp = yield client_1.loginRequestOnly(user);
+            var hasil = {
+                payload: asyncResp.data,
+                type: UserActionType_1.LOGIN_SUCCES
+            };
+            dispatch(hasil);
+        }
+        catch (_a) {
+            var error = {
+                payload: null,
+                type: UserActionType_1.LOGIN_FAILED
+            };
+            dispatch(error);
+        }
+    });
+};
+function UserAwait() {
+    return {
+        type: UserActionType_1.LOGIN_LOADING,
+        payload: null
+    };
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/UserAction/UserActionType.ts":
+/*!****************************************************************!*\
+  !*** ./resources/js/redux/action/UserAction/UserActionType.ts ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.USER_LOGIN = "USER_LOGIN";
+exports.LOGIN_SUCCES = "USER_LOGIN_SUCCES";
+exports.LOGIN_FAILED = "USER_LOGIN_FAILED";
+exports.LOGIN_LOADING = "USER_LOGIN_LOADING";
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/reducer/CabangReducer.ts":
+/*!*****************************************************!*\
+  !*** ./resources/js/redux/reducer/CabangReducer.ts ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const CabangListActionType_1 = __webpack_require__(/*! ../action/LocationListAction/CabangListActionType */ "./resources/js/redux/action/LocationListAction/CabangListActionType.ts");
+const initialState = {
+    data: [],
+    isEror: false,
+    isLoading: false,
+    isFound: false,
+};
+function cabangReducer(state = initialState, action) {
+    console.log(action.type);
+    switch (action.type) {
+        case CabangListActionType_1.GET_LOCATIONLIST_REFRESH:
+            return Object.assign(Object.assign({}, state), { isLoading: true, isEror: false, isFound: true });
+        case CabangListActionType_1.GET_LOCATIONLIST_SUCCES:
+            return Object.assign(Object.assign({}, state), { data: action.payload, isLoading: false, isFound: true });
+        case CabangListActionType_1.GET_LOCATIONLIST_FAILED:
+            return Object.assign(Object.assign({}, state), { isEror: true, isLoading: false, isFound: true });
+        case CabangListActionType_1.GET_LOCATIONLIST_LOADNG:
+            return Object.assign(Object.assign({}, state), { isLoading: true, isEror: false, isFound: true });
+    }
+    return state;
+}
+exports.cabangReducer = cabangReducer;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/reducer/UIReducer.ts":
+/*!*************************************************!*\
+  !*** ./resources/js/redux/reducer/UIReducer.ts ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const UIActionType_1 = __webpack_require__(/*! ../action/UIAction/UIActionType */ "./resources/js/redux/action/UIAction/UIActionType.ts");
+const initialState = {
+    isDrawerOpen: false
+};
+function UIReducer(state = initialState, action) {
+    switch (action.type) {
+        case UIActionType_1.OPEN_DRAWER:
+            return Object.assign(Object.assign({}, state), { isDrawerOpen: true });
+        case UIActionType_1.CLOSE_DRAWER:
+            return Object.assign(Object.assign({}, state), { isDrawerOpen: false });
+        default:
+            return state;
+            break;
+    }
+}
+exports.UIReducer = UIReducer;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/reducer/UserReducer.ts":
+/*!***************************************************!*\
+  !*** ./resources/js/redux/reducer/UserReducer.ts ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const UserActionType_1 = __webpack_require__(/*! ../action/UserAction/UserActionType */ "./resources/js/redux/action/UserAction/UserActionType.ts");
+const initialState = {
+    data: null,
+    isAdmin: false,
+    isLogin: false,
+    isEror: false,
+    isLoading: false,
+};
+function userReducer(state = initialState, action) {
+    switch (action.type) {
+        case UserActionType_1.LOGIN_LOADING:
+            return {
+                data: null,
+                isAdmin: false,
+                isEror: false,
+                isLoading: true,
+                isLogin: false,
+            };
+        case UserActionType_1.LOGIN_SUCCES:
+            return {
+                data: action.payload,
+                isAdmin: false,
+                isEror: false,
+                isLoading: false,
+                isLogin: true,
+            };
+        case UserActionType_1.LOGIN_FAILED:
+            return {
+                data: null,
+                isAdmin: false,
+                isEror: false,
+                isLoading: true,
+                isLogin: true,
+            };
+        default:
+            return state;
+    }
+}
+exports.userReducer = userReducer;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/store/index.ts":
+/*!*******************************************!*\
+  !*** ./resources/js/redux/store/index.ts ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const UserReducer_1 = __webpack_require__(/*! ../reducer/UserReducer */ "./resources/js/redux/reducer/UserReducer.ts");
+const redux_1 = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+const CabangReducer_1 = __webpack_require__(/*! ../reducer/CabangReducer */ "./resources/js/redux/reducer/CabangReducer.ts");
+const UIReducer_1 = __webpack_require__(/*! ../reducer/UIReducer */ "./resources/js/redux/reducer/UIReducer.ts");
+exports.rootReducer = redux_1.combineReducers({
+    user: UserReducer_1.userReducer,
+    cabang: CabangReducer_1.cabangReducer,
+    ui: UIReducer_1.UIReducer
+});
+
+
+/***/ }),
+
+/***/ "./resources/js/util/client.ts":
+/*!*************************************!*\
+  !*** ./resources/js/util/client.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+function Login(loginInput, loginEvent) {
+    var _a, _b;
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            var hasil = yield loginRequestOnly(loginInput);
+            (_a = loginEvent) === null || _a === void 0 ? void 0 : _a.OnSucces(hasil.data);
+        }
+        catch (eror) {
+            console.log(eror);
+            (_b = loginEvent) === null || _b === void 0 ? void 0 : _b.OnEror(eror);
+        }
+    });
+}
+exports.Login = Login;
+function loginRequestOnly(loginInput) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield axios_1.default.post("/api/login", loginInput);
+    });
+}
+exports.loginRequestOnly = loginRequestOnly;
+function getAllJabatanData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield (yield axios_1.default.get("api/getAllJabatan")).data;
+    });
+}
+exports.getAllJabatanData = getAllJabatanData;
+function getAllLokasi() {
+    return __awaiter(this, void 0, void 0, function* () {
+        var hasil = yield axios_1.default.post("/api/getAllCabang");
+        return hasil.data;
+    });
+}
+exports.getAllLokasi = getAllLokasi;
+function getAllAbsensi() {
+    return __awaiter(this, void 0, void 0, function* () {
+        var hasil = yield axios_1.default.get("/api/getAllAbsen");
+        return hasil.data;
+    });
+}
+exports.getAllAbsensi = getAllAbsensi;
+function addLokasi(cabang) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return axios_1.default.post("/api/addCabang", {
+            "latitude": cabang.latitude,
+            "longitude": cabang.longitude,
+            "name": cabang.name,
+            "radius": cabang.radius,
+            "addres": cabang.addres
+        });
+    });
+}
+exports.addLokasi = addLokasi;
+function getAllUser() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return axios_1.default.get('/api/getAllUser');
+    });
+}
+exports.getAllUser = getAllUser;
+
+
+/***/ }),
+
+/***/ 0:
+/*!***********************************!*\
+  !*** multi ./resources/js/app.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! A:\belajar\Al-Hikam\absensi\resources\js\app.js */"./resources/js/app.js");
+
+
+/***/ })
+
+},[[0,"/js/manifest","/js/vendor"]]]);
