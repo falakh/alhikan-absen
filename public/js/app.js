@@ -223,15 +223,79 @@ function DialogEdit(show, onClose) {
 
 "use strict";
 
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const material_table_1 = __importDefault(__webpack_require__(/*! material-table */ "./node_modules/material-table/dist/index.js"));
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const JabatanActionList_1 = __webpack_require__(/*! ../redux/action/ListJabatan/JabatanActionList */ "./resources/js/redux/action/ListJabatan/JabatanActionList.ts");
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 function JabatanDataTable() {
-    return react_1.default.createElement("div", null, " ini tets");
+    var cabangState = (state) => state.jabatan;
+    var state = react_redux_1.useSelector(cabangState);
+    var dispatch = react_redux_1.useDispatch();
+    react_1.useEffect(() => {
+        if (!state.isFound) {
+            dispatch(JabatanActionList_1.GetAllJabatanAction());
+        }
+    });
+    if (state.isLoading) {
+        console.log("loading");
+        return Progres();
+    }
+    return react_1.default.createElement("div", null,
+        " ",
+        DataTableJabatan(state),
+        " ");
 }
 exports.default = JabatanDataTable;
+//     {
+//         "id": 1,
+//         "created_at": "2020-02-09 12:08:11",
+//         "updated_at": "2020-03-23 02:18:01",
+//         "jabtan": "rumah",
+//         "jamMasuk": "08:00:00",
+//         "jamPulang": "14:00:00",
+//         "toleransiDatang": "00:00:12",
+//         "toleransiPulang": "02:00:01"
+//     }
+// ]
+function DataTableJabatan(state) {
+    return (react_1.default.createElement(material_table_1.default, { title: "Data Jabatan", columns: [
+            { title: "jabatan", field: "jabtan" },
+            {
+                title: "Jam Masuk",
+                field: "jamMasuk"
+            },
+            {
+                title: "Jam Pulang",
+                field: "jamPulang"
+            },
+            {
+                title: "Toleransi Keterlambatan ",
+                field: "toleransiDatang"
+            }, {
+                title: "Toleransi Pulang ",
+                field: "toleransiPulang"
+            }
+        ], data: state.data }));
+}
+function Progres() {
+    return (react_1.default.createElement(core_1.Dialog, { open: true, maxWidth: "md", disableBackdropClick: true, disableEscapeKeyDown: true },
+        react_1.default.createElement(core_1.DialogContent, null,
+            react_1.default.createElement(core_1.CircularProgress, { style: { marginLeft: "50%" } }),
+            react_1.default.createElement(core_1.DialogContentText, { style: { marginTop: 20 } },
+                react_1.default.createElement(core_1.Typography, null, " Tolong Menunggu ")))));
+}
 
 
 /***/ }),
@@ -466,7 +530,8 @@ const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/rea
 const drawerWidth = 240;
 const useStyle = core_1.makeStyles((theme) => core_1.createStyles({
     root: {
-        display: "flex"
+        display: "flex",
+        position: "relative"
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1
@@ -592,7 +657,8 @@ class LoginPage extends react_1.Component {
                 width: "100%",
                 margin: 0,
                 backgroundColor: "#32415a",
-                display: "flex"
+                display: "flex",
+                position: "fixed"
             } },
             react_1.default.createElement(LoginCard_1.default, null)));
     }
@@ -635,6 +701,71 @@ if (document.getElementById("example")) {
     react_dom_1.default.render(react_1.default.createElement(react_1.default.Suspense, { fallback: react_1.default.createElement("div", null) },
         react_1.default.createElement(OtherComponent, { store: data })), document.getElementById("example"));
 }
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/ListJabatan/JabatanActionList.ts":
+/*!********************************************************************!*\
+  !*** ./resources/js/redux/action/ListJabatan/JabatanActionList.ts ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const CabangListActionType_1 = __webpack_require__(/*! ../LocationListAction/CabangListActionType */ "./resources/js/redux/action/LocationListAction/CabangListActionType.ts");
+const client_1 = __webpack_require__(/*! ../../../util/client */ "./resources/js/util/client.ts");
+const JabatanActionType_1 = __webpack_require__(/*! ./JabatanActionType */ "./resources/js/redux/action/ListJabatan/JabatanActionType.ts");
+function GetAllJabatanAction() {
+    return (dispatch) => __awaiter(this, void 0, void 0, function* () {
+        try {
+            dispatch({
+                type: JabatanActionType_1.GET_JABATAN_LOADNG
+            });
+            var data = yield client_1.getAllJabatanData();
+            console.log(data);
+            var hasil = {
+                payload: data,
+                type: JabatanActionType_1.GET_JABATAN_SUCCES
+            };
+            dispatch(hasil);
+        }
+        catch (error) {
+            dispatch({ type: CabangListActionType_1.GET_LOCATIONLIST_FAILED });
+            console.log("eror gan");
+        }
+    });
+}
+exports.GetAllJabatanAction = GetAllJabatanAction;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/ListJabatan/JabatanActionType.ts":
+/*!********************************************************************!*\
+  !*** ./resources/js/redux/action/ListJabatan/JabatanActionType.ts ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GET_JABATAN_REFRESH = "GET_JABATAN_REFRESH";
+exports.GET_JABATAN_SUCCES = "GET_LOCATIONLIST_SUCCES";
+exports.GET_LOCATIONLIST_FAILED = "GET_LOCATIONLIST_FAILED";
+exports.GET_JABATAN_LOADNG = "GET_JABATAN_LOADNG";
 
 
 /***/ }),
@@ -863,6 +994,38 @@ exports.cabangReducer = cabangReducer;
 
 /***/ }),
 
+/***/ "./resources/js/redux/reducer/JabtanReducer.ts":
+/*!*****************************************************!*\
+  !*** ./resources/js/redux/reducer/JabtanReducer.ts ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const JabatanActionType_1 = __webpack_require__(/*! ../action/ListJabatan/JabatanActionType */ "./resources/js/redux/action/ListJabatan/JabatanActionType.ts");
+var initialState = {
+    data: [],
+    isEror: false,
+    isFound: false,
+    isLoading: false
+};
+function jabatanReducer(state = initialState, action) {
+    console.log(action.type);
+    switch (action.type) {
+        case JabatanActionType_1.GET_JABATAN_REFRESH:
+            return Object.assign(Object.assign({}, state), { isLoading: true, isEror: false, isFound: false });
+        case JabatanActionType_1.GET_JABATAN_SUCCES:
+            return Object.assign(Object.assign({}, state), { data: action.payload, isLoading: false, isFound: true });
+    }
+    return state;
+}
+exports.jabatanReducer = jabatanReducer;
+
+
+/***/ }),
+
 /***/ "./resources/js/redux/reducer/UIReducer.ts":
 /*!*************************************************!*\
   !*** ./resources/js/redux/reducer/UIReducer.ts ***!
@@ -959,11 +1122,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UserReducer_1 = __webpack_require__(/*! ../reducer/UserReducer */ "./resources/js/redux/reducer/UserReducer.ts");
 const redux_1 = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 const CabangReducer_1 = __webpack_require__(/*! ../reducer/CabangReducer */ "./resources/js/redux/reducer/CabangReducer.ts");
+const JabtanReducer_1 = __webpack_require__(/*! ../reducer/JabtanReducer */ "./resources/js/redux/reducer/JabtanReducer.ts");
 const UIReducer_1 = __webpack_require__(/*! ../reducer/UIReducer */ "./resources/js/redux/reducer/UIReducer.ts");
 exports.rootReducer = redux_1.combineReducers({
     user: UserReducer_1.userReducer,
     cabang: CabangReducer_1.cabangReducer,
-    ui: UIReducer_1.UIReducer
+    ui: UIReducer_1.UIReducer,
+    jabatan: JabtanReducer_1.jabatanReducer
 });
 
 
@@ -1014,7 +1179,7 @@ function loginRequestOnly(loginInput) {
 exports.loginRequestOnly = loginRequestOnly;
 function getAllJabatanData() {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield (yield axios_1.default.get("api/getAllJabatan")).data;
+        return yield (yield axios_1.default.get("/api/getAllJabatan")).data;
     });
 }
 exports.getAllJabatanData = getAllJabatanData;

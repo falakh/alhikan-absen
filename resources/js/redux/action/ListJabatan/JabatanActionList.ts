@@ -1,8 +1,8 @@
 import { ThunkAction } from "redux-thunk"
 import { RootState } from "../../store"
 import { Action } from "redux"
-import { GET_LOCATIONLIST_LOADNG, GetCabangSucces, GET_LOCATIONLIST_SUCCES, GET_LOCATIONLIST_FAILED } from "../LocationListAction/CabangListActionType"
-import { getAllLokasi, getAllJabatanData } from "../../../util/client"
+import { GET_LOCATIONLIST_FAILED } from "../LocationListAction/CabangListActionType"
+import { getAllJabatanData } from "../../../util/client"
 import { GET_JABATAN_LOADNG, GetJabatanSucces, GET_JABATAN_SUCCES } from "./JabatanActionType"
 
 export function GetAllJabatanAction(): ThunkAction<void, RootState, null, Action<string>> {

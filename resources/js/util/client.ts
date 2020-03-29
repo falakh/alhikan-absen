@@ -21,7 +21,7 @@ export async function loginRequestOnly(loginInput : LoginInput){
 }
 
 export async function getAllJabatanData(){
-    return await (await Axios.get("api/getAllJabatan")).data as Jabatan[]
+    return await (await Axios.get("/api/getAllJabatan")).data as Jabatan[]
 }
 
 export async function getAllLokasi(){

@@ -12,7 +12,8 @@ export default class LoginPage extends Component {
                     width: "100%",
                     margin: 0,
                     backgroundColor: "#32415a",
-                    display: "flex"
+                    display: "flex",
+                    position:"fixed"
                 }}
             >
                 <LoginCard />
