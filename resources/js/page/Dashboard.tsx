@@ -69,7 +69,7 @@ export default function Dashboard() {
     return (
         <div style={{ position: "relative" }} className={classes.root}>
             <CssBaseline />
-            {NavBar()}
+           <NavBar/>
             <main
                 className={clsx({
                     [classes.content]: !uiState.isDrawerOpen,
@@ -95,8 +95,11 @@ export default function Dashboard() {
                         import(/* webpackPrefetch: true */ "../components/UserListDataTableComponent")
                     )}
                 />
-                  <Route path="/dashboard/mobileUser"
+                  <Route path="/dashboard/jabatan"
                     component={/* webpackPrefetch: true */ React.lazy(()=>import("../components/JabatanTableList"))}
+                />
+                 <Route path="/dashboard/mobileUser"
+                    component={/* webpackPrefetch: true */ React.lazy(()=>import("../components/MobileUserTableComponent"))}
                 />
             </main>
         </div>

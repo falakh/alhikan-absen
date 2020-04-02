@@ -144,7 +144,7 @@ function LocationTable() {
                     icon: "add",
                     tooltip: "Add User",
                     isFreeAction: true,
-                    onClick: event => setEdit(true)
+                    onClick: () => setEdit(true)
                 }
             ], title: "Lokasi", columns: [
                 { title: "Name", field: "name" },
@@ -188,14 +188,14 @@ function DialogEdit(show, onClose) {
                 react_1.default.createElement(core_1.TextField, { value: radius, label: "Radius", placeholder: "Radius", onChange: event => setRadius(event.target.value), fullWidth: true }),
                 react_1.default.createElement(core_1.TextField, { placeholder: "Koordinat", fullWidth: true, disabled: true, value: latitude + " , " + longitude, InputProps: {
                         endAdornment: (react_1.default.createElement(core_1.InputAdornment, { position: "end" },
-                            react_1.default.createElement(core_1.Button, { onClick: event => getLocation(position => {
+                            react_1.default.createElement(core_1.Button, { onClick: () => getLocation(position => {
                                     setLongitude(position.coords.longitude);
                                     setLatitude(position.coords.latitude);
                                 }) }, "Get Lokasi")))
                     } }))),
         react_1.default.createElement(core_1.DialogActions, null,
             react_1.default.createElement(core_1.Button, { autoFocus: true, color: "primary" }, "Cancel"),
-            react_1.default.createElement(core_1.Button, { color: "primary", autoFocus: true, onClick: event => {
+            react_1.default.createElement(core_1.Button, { color: "primary", autoFocus: true, onClick: () => {
                     client_1.addLokasi({
                         addres: alamat,
                         latitude: latitude,
@@ -205,7 +205,7 @@ function DialogEdit(show, onClose) {
                         name: nama,
                         radius: radius,
                         updated_at: ""
-                    }).then(hasil => {
+                    }).then(() => {
                         window.location.reload();
                     });
                 } }, "Send"))));
@@ -357,6 +357,80 @@ exports.default = LoginCard;
 
 /***/ }),
 
+/***/ "./resources/js/components/MobileUserTableComponent.tsx":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/MobileUserTableComponent.tsx ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const react_async_1 = __webpack_require__(/*! react-async */ "./node_modules/react-async/dist-web/index.js");
+const client_1 = __webpack_require__(/*! ../util/client */ "./resources/js/util/client.ts");
+const material_table_1 = __importDefault(__webpack_require__(/*! material-table */ "./node_modules/material-table/dist/index.js"));
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const ProgressCircleComponent_1 = __importDefault(__webpack_require__(/*! ../components/ProgressCircleComponent */ "./resources/js/components/ProgressCircleComponent.tsx"));
+function MobileUserTable() {
+    var [mobileUserList, setMobileUserList] = react_1.default.useState([]);
+    const { data, error, isLoading } = react_async_1.useAsync({ promiseFn: client_1.getAllMobileUser }, []);
+    if (data) {
+        return MobileUserUi(data.data);
+    }
+    if (isLoading) {
+        return ProgressCircleComponent_1.default();
+    }
+    return react_1.default.createElement("div", null, " ini tabel");
+}
+exports.default = MobileUserTable;
+/**
+  {
+        "id": 1,
+        "deviceId": "3",
+        "user_id": 1,
+        "created_at": "2020-01-26 03:53:26",
+        "updated_at": "2020-01-26 03:53:26",
+        "email": "falakh@mail.com",
+        "password": "fahmi134679",
+        "name": "zul",
+        "nidn": "16515161",
+        "alamat": "123123",
+        "status": "mahasiswa"
+    }
+ */
+function MobileUserUi(data) {
+    return react_1.default.createElement(material_table_1.default, { data: data, columns: [
+            {
+                field: "id",
+                title: "idLogin"
+            }, {
+                field: "deviceId",
+                title: "id perangkat"
+            }, {
+                field: "nidn",
+                title: "nidn"
+            }, {
+                field: "name",
+                title: "nama"
+            }, {
+                field: "status",
+                title: "status"
+            }, {
+                title: "detail",
+                render: (props) => react_1.default.createElement(core_1.Button, null, "Detail ")
+            }
+        ] });
+}
+exports.MobileUserUi = MobileUserUi;
+
+
+/***/ }),
+
 /***/ "./resources/js/components/NavBar.tsx":
 /*!********************************************!*\
   !*** ./resources/js/components/NavBar.tsx ***!
@@ -449,6 +523,11 @@ function NavBar() {
                         react_1.default.createElement(core_1.ListItemIcon, null,
                             react_1.default.createElement("div", { className: "material-icons" }, "person")),
                         react_1.default.createElement(core_1.ListItemText, { primary: "UserList" }))),
+                react_1.default.createElement(react_router_dom_1.NavLink, { className: "nav-link", to: "/dashboard/jabatan", style: { textDecoration: "none" } },
+                    react_1.default.createElement(core_1.ListItem, { button: true },
+                        react_1.default.createElement(core_1.ListItemIcon, null,
+                            react_1.default.createElement("div", { className: "material-icons" }, "mobile_screen_share")),
+                        react_1.default.createElement(core_1.ListItemText, { primary: "Mobile User" }))),
                 react_1.default.createElement(react_router_dom_1.NavLink, { className: "nav-link", to: "/dashboard/mobileUser", style: { textDecoration: "none" } },
                     react_1.default.createElement(core_1.ListItem, { button: true },
                         react_1.default.createElement(core_1.ListItemIcon, null,
@@ -456,6 +535,33 @@ function NavBar() {
                         react_1.default.createElement(core_1.ListItemText, { primary: "Mobile User" }))))));
 }
 exports.NavBar = NavBar;
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ProgressCircleComponent.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/ProgressCircleComponent.tsx ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+function Progres() {
+    return (react_1.default.createElement(core_1.Dialog, { open: true, maxWidth: "md", disableBackdropClick: true, disableEscapeKeyDown: true },
+        react_1.default.createElement(core_1.DialogContent, null,
+            react_1.default.createElement(core_1.CircularProgress, { style: { marginLeft: "50%" } }),
+            react_1.default.createElement(core_1.DialogContentText, { style: { marginTop: 20 } },
+                react_1.default.createElement(core_1.Typography, null, " Tolong Menunggu ")))));
+}
+exports.default = Progres;
 
 
 /***/ }),
@@ -575,7 +681,7 @@ function Dashboard() {
     const classes = useStyle();
     return (react_1.default.createElement("div", { style: { position: "relative" }, className: classes.root },
         react_1.default.createElement(core_1.CssBaseline, null),
-        NavBar_1.NavBar(),
+        react_1.default.createElement(NavBar_1.NavBar, null),
         react_1.default.createElement("main", { className: clsx_1.default({
                 [classes.content]: !uiState.isDrawerOpen,
                 [classes.contentShift]: uiState.isDrawerOpen
@@ -584,7 +690,8 @@ function Dashboard() {
             react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/lokasi", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackPrefetch: true */ /*! ../components/AddLocationTable */ "./resources/js/components/AddLocationTable.tsx")))) }),
             react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackPrefetch: true */ /*! ../components/AbsensiDataTableComponent */ "./resources/js/components/AbsensiDataTableComponent.tsx")))), exact: true }),
             react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/userlist", component: react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/* webpackPrefetch: true */ /*! ../components/UserListDataTableComponent */ "./resources/js/components/UserListDataTableComponent.tsx")))) }),
-            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/mobileUser", component: /* webpackPrefetch: true */ react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/*! ../components/JabatanTableList */ "./resources/js/components/JabatanTableList.tsx")))) }))));
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/jabatan", component: /* webpackPrefetch: true */ react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/*! ../components/JabatanTableList */ "./resources/js/components/JabatanTableList.tsx")))) }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/dashboard/mobileUser", component: /* webpackPrefetch: true */ react_1.default.lazy(() => Promise.resolve().then(() => __importStar(__webpack_require__(/*! ../components/MobileUserTableComponent */ "./resources/js/components/MobileUserTableComponent.tsx")))) }))));
 }
 exports.default = Dashboard;
 
@@ -1157,6 +1264,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+function getAllMobileUser() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return axios_1.default.get('/api/allMobileUser');
+    });
+}
+exports.getAllMobileUser = getAllMobileUser;
 function Login(loginInput, loginEvent) {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {

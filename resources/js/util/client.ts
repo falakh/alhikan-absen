@@ -5,6 +5,9 @@ import { LoginEvent } from "../type/LoginEvent";
 import { Cabang } from "../type/Cabang";
 import { Jabatan } from "../type/Jabatan";
 
+export async function getAllMobileUser(){
+    return Axios.get('/api/allMobileUser')
+}
 
 export async function Login(loginInput : LoginInput,loginEvent? : LoginEvent){
     try{

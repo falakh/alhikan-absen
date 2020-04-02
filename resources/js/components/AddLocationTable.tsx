@@ -2,21 +2,16 @@ import React, { useState, useEffect } from "react";
 import {
     Button,
     CircularProgress,
-    createStyles,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
-    TableCell,
     TextField,
-    Theme,
-    withStyles,
     InputAdornment,
     Typography
 } from "@material-ui/core";
-import { getAllLokasi, addLokasi } from "../util/client";
-import { useAsync } from "react-async";
+import { addLokasi } from "../util/client";
 import MaterialTable from "material-table";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
@@ -57,7 +52,7 @@ export default function LocationTable() {
                         icon: "add",
                         tooltip: "Add User",
                         isFreeAction: true,
-                        onClick: event => setEdit(true)
+                        onClick: () => setEdit(true)
                     }
                 ]}
                 title={"Lokasi"}
@@ -145,7 +140,7 @@ function DialogEdit(show: boolean, onClose: any) {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <Button
-                                        onClick={event =>
+                                        onClick={() =>
                                             getLocation(position => {
                                                 setLongitude(
                                                     position.coords.longitude
@@ -171,7 +166,7 @@ function DialogEdit(show: boolean, onClose: any) {
                 <Button
                     color="primary"
                     autoFocus
-                    onClick={event => {
+                    onClick={() => {
                         addLokasi({
                             addres: alamat,
                             latitude: latitude,
@@ -181,7 +176,7 @@ function DialogEdit(show: boolean, onClose: any) {
                             name: nama,
                             radius: (radius as unknown) as number,
                             updated_at: ""
-                        }).then(hasil => {
+                        }).then(() => {
                             window.location.reload();
                         });
                     }}

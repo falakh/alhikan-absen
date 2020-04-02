@@ -129,6 +129,18 @@ export function NavBar() {
                     </NavLink>
                     <NavLink
                         className="nav-link"
+                        to="/dashboard/jabatan"
+                        style={{ textDecoration: "none" }}
+                    >
+                        <ListItem button>
+                            <ListItemIcon>
+                                <div className="material-icons">mobile_screen_share</div>
+                            </ListItemIcon>
+                            <ListItemText primary="Mobile User" />
+                        </ListItem>
+                    </NavLink>
+                    <NavLink
+                        className="nav-link"
                         to="/dashboard/mobileUser"
                         style={{ textDecoration: "none" }}
                     >
