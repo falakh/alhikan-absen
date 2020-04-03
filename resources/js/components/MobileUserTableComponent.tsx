@@ -3,7 +3,7 @@ import { MobileUserResponse } from "../type/MobileUserResponse";
 import { useAsync } from "react-async";
 import { getAllMobileUser } from "../util/client";
 import MaterialTable from "material-table";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import Progress from "../components/ProgressCircleComponent";
 
 export default function MobileUserTable() {
@@ -13,7 +13,9 @@ export default function MobileUserTable() {
         return MobileUserUi(data.data as MobileUserResponse[])
     }
     if(isLoading){
-       return Progress()
+        return  <CircularProgress style={{ marginLeft: "50%" }} />
+
+    //    return Progress()
     }
     return <div> ini tabel</div>;
 }

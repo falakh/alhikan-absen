@@ -14,7 +14,7 @@ export function UIReducer(state = initialState, action: UIActionTypes): UIState 
             return { ...state, isDrawerOpen: false }
         default:
             return state
-            break;
+
     }
 
 
