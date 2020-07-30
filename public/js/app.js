@@ -366,24 +366,38 @@ exports.default = LoginCard;
 
 "use strict";
 
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const react_async_1 = __webpack_require__(/*! react-async */ "./node_modules/react-async/dist-web/index.js");
-const client_1 = __webpack_require__(/*! ../util/client */ "./resources/js/util/client.ts");
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const material_table_1 = __importDefault(__webpack_require__(/*! material-table */ "./node_modules/material-table/dist/index.js"));
 const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-const ProgressCircleComponent_1 = __importDefault(__webpack_require__(/*! ../components/ProgressCircleComponent */ "./resources/js/components/ProgressCircleComponent.tsx"));
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const MobileUSerActionList_1 = __webpack_require__(/*! ../redux/action/MobileUser/MobileUSerActionList */ "./resources/js/redux/action/MobileUser/MobileUSerActionList.ts");
 function MobileUserTable() {
-    var [mobileUserList, setMobileUserList] = react_1.default.useState([]);
-    const { data, error, isLoading } = react_async_1.useAsync({ promiseFn: client_1.getAllMobileUser }, []);
-    if (data) {
-        return MobileUserUi(data.data);
+    var mobileUserUiState = (state) => state.mobileUser;
+    var redux = react_redux_1.useSelector(mobileUserUiState);
+    var dispatch = react_redux_1.useDispatch();
+    react_1.useEffect(() => {
+        if (!redux.isfound) {
+            dispatch(MobileUSerActionList_1.GetAllMobileUserAction());
+            console.log("test");
+        }
+    });
+    if (redux.isfound) {
+        return MobileUserUi(redux.data);
     }
-    if (isLoading) {
-        return ProgressCircleComponent_1.default();
+    if (redux.isLoading) {
+        return react_1.default.createElement(core_1.CircularProgress, { style: { marginLeft: "50%" } });
+        //    return Progress()
     }
     return react_1.default.createElement("div", null, " ini tabel");
 }
@@ -404,7 +418,15 @@ exports.default = MobileUserTable;
     }
  */
 function MobileUserUi(data) {
-    return react_1.default.createElement(material_table_1.default, { data: data, columns: [
+    var dispatch = react_redux_1.useDispatch();
+    return react_1.default.createElement(material_table_1.default, { title: "Mobile User", actions: [
+            {
+                icon: "add",
+                tooltip: "Add User",
+                isFreeAction: true,
+                onClick: () => dispatch(MobileUSerActionList_1.GetAllMobileUserAction())
+            }
+        ], data: data, columns: [
             {
                 field: "id",
                 title: "idLogin"
@@ -535,33 +557,6 @@ function NavBar() {
                         react_1.default.createElement(core_1.ListItemText, { primary: "Mobile User" }))))));
 }
 exports.NavBar = NavBar;
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ProgressCircleComponent.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/ProgressCircleComponent.tsx ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-function Progres() {
-    return (react_1.default.createElement(core_1.Dialog, { open: true, maxWidth: "md", disableBackdropClick: true, disableEscapeKeyDown: true },
-        react_1.default.createElement(core_1.DialogContent, null,
-            react_1.default.createElement(core_1.CircularProgress, { style: { marginLeft: "50%" } }),
-            react_1.default.createElement(core_1.DialogContentText, { style: { marginTop: 20 } },
-                react_1.default.createElement(core_1.Typography, null, " Tolong Menunggu ")))));
-}
-exports.default = Progres;
 
 
 /***/ }),
@@ -941,6 +936,68 @@ exports.GET_LOCATIONLIST_LOADNG = "GET_LOCATIONLIST_LOADNG";
 
 /***/ }),
 
+/***/ "./resources/js/redux/action/MobileUser/MobileUSerActionList.ts":
+/*!**********************************************************************!*\
+  !*** ./resources/js/redux/action/MobileUser/MobileUSerActionList.ts ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const MobileUserActionType_1 = __webpack_require__(/*! ./MobileUserActionType */ "./resources/js/redux/action/MobileUser/MobileUserActionType.ts");
+const client_1 = __webpack_require__(/*! ../../../util/client */ "./resources/js/util/client.ts");
+function GetAllMobileUserAction() {
+    return (dispatch) => __awaiter(this, void 0, void 0, function* () {
+        try {
+            dispatch({
+                type: MobileUserActionType_1.LOADING
+            });
+            var requestGetAllMobileUser = yield client_1.getAllMobileUser();
+            dispatch({
+                type: MobileUserActionType_1.MOBILE_USER_FOUND,
+                payload: requestGetAllMobileUser.data
+            });
+        }
+        catch (error) {
+            dispatch({ type: MobileUserActionType_1.GET_MOBILE_USER_EROR, payload: error });
+        }
+    });
+}
+exports.GetAllMobileUserAction = GetAllMobileUserAction;
+
+
+/***/ }),
+
+/***/ "./resources/js/redux/action/MobileUser/MobileUserActionType.ts":
+/*!**********************************************************************!*\
+  !*** ./resources/js/redux/action/MobileUser/MobileUserActionType.ts ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GET_MOBILE_USER = "GET_MOBLE_USER";
+exports.UPDATE_USER = "UPDATE_USER";
+exports.LOADING = "LOADING";
+exports.MOBILE_USER_FOUND = "MOBILE_USER_FOUND";
+exports.GET_MOBILE_USER_EROR = "GET_MOBILE_USER_EROR";
+
+
+/***/ }),
+
 /***/ "./resources/js/redux/action/UIAction/UIActionLIst.ts":
 /*!************************************************************!*\
   !*** ./resources/js/redux/action/UIAction/UIActionLIst.ts ***!
@@ -1133,6 +1190,39 @@ exports.jabatanReducer = jabatanReducer;
 
 /***/ }),
 
+/***/ "./resources/js/redux/reducer/MobileUserReducer.ts":
+/*!*********************************************************!*\
+  !*** ./resources/js/redux/reducer/MobileUserReducer.ts ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const MobileUserActionType_1 = __webpack_require__(/*! ../action/MobileUser/MobileUserActionType */ "./resources/js/redux/action/MobileUser/MobileUserActionType.ts");
+var initialState = {
+    isLoading: false,
+    data: [],
+    isfound: false
+};
+function mobileReducer(state = initialState, action) {
+    console.log(action.type);
+    switch (action.type) {
+        case MobileUserActionType_1.LOADING:
+            return Object.assign(Object.assign({}, state), { isLoading: true });
+        case MobileUserActionType_1.GET_MOBILE_USER:
+            return Object.assign(Object.assign({}, state), { isLoading: true, isfound: false });
+        case MobileUserActionType_1.MOBILE_USER_FOUND:
+            return Object.assign(Object.assign({}, state), { data: action.payload, isLoading: true, isfound: true });
+    }
+    return state;
+}
+exports.mobileReducer = mobileReducer;
+
+
+/***/ }),
+
 /***/ "./resources/js/redux/reducer/UIReducer.ts":
 /*!*************************************************!*\
   !*** ./resources/js/redux/reducer/UIReducer.ts ***!
@@ -1155,7 +1245,6 @@ function UIReducer(state = initialState, action) {
             return Object.assign(Object.assign({}, state), { isDrawerOpen: false });
         default:
             return state;
-            break;
     }
 }
 exports.UIReducer = UIReducer;
@@ -1231,11 +1320,13 @@ const redux_1 = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.
 const CabangReducer_1 = __webpack_require__(/*! ../reducer/CabangReducer */ "./resources/js/redux/reducer/CabangReducer.ts");
 const JabtanReducer_1 = __webpack_require__(/*! ../reducer/JabtanReducer */ "./resources/js/redux/reducer/JabtanReducer.ts");
 const UIReducer_1 = __webpack_require__(/*! ../reducer/UIReducer */ "./resources/js/redux/reducer/UIReducer.ts");
+const MobileUserReducer_1 = __webpack_require__(/*! ../reducer/MobileUserReducer */ "./resources/js/redux/reducer/MobileUserReducer.ts");
 exports.rootReducer = redux_1.combineReducers({
     user: UserReducer_1.userReducer,
     cabang: CabangReducer_1.cabangReducer,
     ui: UIReducer_1.UIReducer,
-    jabatan: JabtanReducer_1.jabatanReducer
+    jabatan: JabtanReducer_1.jabatanReducer,
+    mobileUser: MobileUserReducer_1.mobileReducer
 });
 
 

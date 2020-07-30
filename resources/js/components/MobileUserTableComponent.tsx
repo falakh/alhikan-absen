@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MobileUserResponse } from "../type/MobileUserResponse";
-import { useAsync } from "react-async";
-import { getAllMobileUser } from "../util/client";
 import MaterialTable from "material-table";
-import { Button, CircularProgress } from "@material-ui/core";
-import Progress from "../components/ProgressCircleComponent";
+import { Button, CircularProgress, Icon } from "@material-ui/core";
+import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { GetAllMobileUserAction } from "../redux/action/MobileUser/MobileUSerActionList";
 
 export default function MobileUserTable() {
-    var [mobileUserList, setMobileUserList] = React.useState<MobileUserResponse[]>([]);
-    const { data, error, isLoading } = useAsync({ promiseFn: getAllMobileUser });
-    if(data){
-        return MobileUserUi(data.data as MobileUserResponse[])
+    var mobileUserUiState = (state : RootState)=> state.mobileUser;
+    var redux = useSelector(mobileUserUiState)
+    var dispatch = useDispatch();
+    useEffect(()=>{
+        if(!redux.isfound){
+            dispatch(GetAllMobileUserAction())
+            console.log("test")
+
+        }
+    })
+    if(redux.isfound){
+        return MobileUserUi(redux.data as MobileUserResponse[])
     }
-    if(isLoading){
+    if(redux.isLoading){
         return  <CircularProgress style={{ marginLeft: "50%" }} />
 
     //    return Progress()
@@ -36,8 +44,20 @@ export default function MobileUserTable() {
     }
  */
 export function MobileUserUi(data : MobileUserResponse[]){
+    var dispatch = useDispatch()
     return <MaterialTable
     title="Mobile User"
+    actions={
+        [
+                {
+                    icon: "add",
+                    tooltip: "Add User",
+                    isFreeAction: true,
+                    onClick:()=> dispatch(GetAllMobileUserAction())
+
+                }
+        ]
+    }
     data={data} columns={
         [
             {

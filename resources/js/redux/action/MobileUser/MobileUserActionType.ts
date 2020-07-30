@@ -29,4 +29,4 @@ export interface GET_MOBILE_USER_EROR{
     payload: Error
 }
 
-export type MobileUserActionType = updateUser | GetMobileUserRefresh | GET_MOBILE_USER_EROR | MobileUserFound
+export type MobileUserActionType = updateUser | GetMobileUserRefresh | GET_MOBILE_USER_EROR | MobileUserFound | StartLoading
